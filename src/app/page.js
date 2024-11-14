@@ -1,14 +1,17 @@
-import Image from "next/image";
 import supabase from '@/lib/supabaseClient'
+import Feeds from '@/app/components/feeds'
 
 
 export default async function Home() {
 
+let { data: feeds, error } = await supabase
+.from('feeds')
+.select('*')
+        
 
-  const test = await supabase
-    .from('test')
-    .select('*')
-
-
-    return <pre>{test.data[0].test}</pre>
+  return (
+    <section>   
+      <Feeds feeds={{feeds}}/>
+    </section>
+  )
 }
