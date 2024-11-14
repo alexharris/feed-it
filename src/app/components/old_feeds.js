@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Parser from 'rss-parser';
-import supabase from '@/lib/supabaseClient';
 
 const parser = new Parser();
 // Tried making my own CORS proxy but it didnt work
@@ -24,63 +23,50 @@ function GetCadence(posts) {
 }
 
 
-function RenderFeeds({ feeds }) {
-  console.log(feeds);
+function RenderFeeds({ feedIds }) {
+
+  console.log(feedIds);
 
   return (
     <div>
       {feeds.map((feed, index) => (
         <div key={index} className='rounded-lg border border-blue-400 p-4 m-4'>
-        <h2>{feed.title}</h2>
-        <p>{feed.description}</p>
-        <span>{feed.url}</span><br />
-        <span><GetCadence posts={feed.items} /></span>
-      </div>
+          <h2>{feed.title}</h2>
+          <p>{feed.description}</p>
+          <span>{feed.url}</span><br />
+          <span><GetCadence posts={feed.items} /></span>
+        </div>
       ))}
     </div>
   );
 }
 
-
 export default function Feeds({ feedIds }) {
   const [rssFeeds, setRssFeeds] = useState([]);
-
   useEffect(() => {
     async function fetchFeeds() {
-      try {
-        let { data: feeds, error } = await supabase
-          .from('feeds')
-          .select('*')
-          .in('id', feedIds);
-
-        if (error) {
-          console.error('Error fetching feeds:', error);
-          return;
-        }
-
-        const fetchedFeeds = await Promise.all(feeds.map(async feed => {
-          console.log(feed.rss)
-          const response = await fetch(CORS_PROXY + feed.rss);
+      const feedUrls = feeds.feeds.map(feed => feed.rss);
+      const fetchedFeeds = await Promise.all(feedUrls.map(async url => {
+        try {
+          const response = await fetch(CORS_PROXY + url);
           const text = await response.text();
-          const parsedFeed = await parser.parseString(text);
+          const feed = await parser.parseString(text);
+          console.log(feed);
           return {
-            title: parsedFeed.title,
-            description: parsedFeed.description,
-            url: feed.url,
-            rss: feed.rss,
-            items: parsedFeed.items
+            title: feed.title,
+            description: feed.description,
+            url: url,
+            items: feed.items
           };
-        }));
-
-        setRssFeeds(fetchedFeeds);
-      } catch (error) {
-        console.error('Error fetching or parsing feeds:', error);
-      }
+        } catch (error) {
+          console.error(`Error fetching or parsing feed from ${url}`, error);
+          return null;
+        }
+      }));
+      setRssFeeds(fetchedFeeds.filter(feed => feed !== null));
     }
-
     fetchFeeds();
   }, [feedIds]);
-
   return (
     <section>
       <RenderFeeds feeds={rssFeeds} />
