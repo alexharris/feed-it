@@ -10,8 +10,6 @@ function GetCadence(posts) {
 
   let postArray = Object.values(posts2).map(post => new Date(post));
 
-  console.log(postArray);
-
   const firstDate = Math.min(...postArray);
   const lastDate = Math.max(...postArray);
   const weeks = (lastDate - firstDate) / (1000 * 60 * 60 * 24 * 7);
@@ -26,10 +24,14 @@ function RenderFeeds({ feeds }) {
     <div>
       {Object.values(feeds.feeds).map((feed, index) => (
         <div key={index} className='rounded-lg border border-blue-400 p-4 mb-4'>
-        <h2>{feed.title}</h2>
-        <p>{feed.description}</p>
-        <span>{feed.url}</span><br />
-        <span><GetCadence posts={feed.items} /></span>
+        <h2 className="font-semibold">{feed.title}</h2>
+        <ul>
+          <li>{feed.description}</li>
+          <li>{feed.url}</li>
+          <li>{feed.rss}</li>
+          <li><GetCadence posts={feed.items} /></li>
+        </ul>
+
       </div>
       ))}
     </div>
@@ -38,10 +40,9 @@ function RenderFeeds({ feeds }) {
 
 
 export default function Feeds(feeds) {
-
+  console.log(feeds)
   return (
     <section>
-      Hello
       <RenderFeeds feeds={feeds} />
     </section>
   );

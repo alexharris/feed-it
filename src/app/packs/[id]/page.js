@@ -1,6 +1,7 @@
 import React from 'react';
 import supabase from '@/lib/supabaseClient'
 import Feeds from '@/app/components/feeds'
+import DownloadFile from '@/app/components/downloadFile'
 import Parser from 'rss-parser';
 
 const parser = new Parser();
@@ -31,12 +32,13 @@ async function fetchFeeds(feedIds) {
       itemsObject[index] = item.pubDate;
     });
 
-    // console.log(itemsObject)
-
+    //parsedFeed comes from the feed itself
+    //feed comes from the db
     fetchedFeeds[feed.id] = {
       title: parsedFeed.title,
       description: parsedFeed.description,
-      url: parsedFeed.url,
+      url: feed.url,
+      rss: parsedFeed.feedUrl,
       items: itemsObject
     };
   }));
@@ -65,6 +67,7 @@ export default async function Page({ params }) {
         <div className="border border-blue-400 rounded p-2">
           <h1 className="text-lg font-semibold">{pack[0].title}</h1>
           <p>{pack[0].description}</p>
+          <DownloadFile feeds={fetchedFeeds} />
         </div>
       </div>
       {/* Main */}
