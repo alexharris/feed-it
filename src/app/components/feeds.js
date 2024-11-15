@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-
+import Link from 'next/link'
 
 function GetCadence(posts) {
   let posts2 = posts.posts
   // console.log(posts.length)
-  if (!posts2 || posts2.length === 0) return "No posts available";
+  if (
+    !posts2 || posts2.length === 0) return "No posts available";
 
   let postArray = Object.values(posts2).map(post => new Date(post));
 
@@ -24,12 +25,12 @@ function RenderFeeds({ feeds }) {
     <div>
       {Object.values(feeds.feeds).map((feed, index) => (
         <div key={index} className='rounded-lg border border-blue-400 p-4 mb-4'>
-        <h2 className="font-semibold">{feed.title}</h2>
+        <Link href={feed.url}><h2 className="font-semibold">{feed.title}</h2></Link>
         <ul>
           <li>{feed.description}</li>
           <li>{feed.url}</li>
           <li>{feed.rss}</li>
-          <li><GetCadence posts={feed.items} /></li>
+          <li><GetCadence posts={feed.itemDates} /></li>
         </ul>
 
       </div>
@@ -40,7 +41,6 @@ function RenderFeeds({ feeds }) {
 
 
 export default function Feeds(feeds) {
-  console.log(feeds)
   return (
     <section>
       <RenderFeeds feeds={feeds} />

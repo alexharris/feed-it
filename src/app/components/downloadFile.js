@@ -36,7 +36,7 @@ function downloadOPML(feeds) {
 function DownloadFile({ feeds }) {
   return (
     <div>
-      <button onClick={() => downloadOPML(feeds)}>Download OPML</button>
+      <button className="button" onClick={() => downloadOPML(feeds)}>Download OPML</button>
     </div>
   );
 }

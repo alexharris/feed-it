@@ -2,7 +2,9 @@ import React from 'react';
 import supabase from '@/lib/supabaseClient'
 import Feeds from '@/app/components/feeds'
 import DownloadFile from '@/app/components/downloadFile'
+import FeedFrequency from '@/app/components/feedFrequency'
 import Parser from 'rss-parser';
+import Link from 'next/link'
 
 const parser = new Parser();
 // Tried making my own CORS proxy but it didnt work
@@ -32,17 +34,18 @@ async function fetchFeeds(feedIds) {
       itemsObject[index] = item.pubDate;
     });
 
+
+
     //parsedFeed comes from the feed itself
     //feed comes from the db
     fetchedFeeds[feed.id] = {
       title: parsedFeed.title,
       description: parsedFeed.description,
-      url: feed.url,
+      url: parsedFeed.link,
       rss: parsedFeed.feedUrl,
-      items: itemsObject
+      itemDates: itemsObject
     };
   }));
-
   return fetchedFeeds
 }
 
@@ -59,19 +62,19 @@ export default async function Page({ params }) {
   const feedIds = pack[0].feed_ids;
 
   const fetchedFeeds = await fetchFeeds(feedIds);
-
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Sidebar */}
-      <div className="w-full lg:w-1/4 p-4 lg:pr-0">
-        <div className="border border-blue-400 rounded p-2">
+      <div className="w-full lg:w-1/3 p-4 lg:pr-0">
+        <div className="bg-blue-100 rounded p-2">
           <h1 className="text-lg font-semibold">{pack[0].title}</h1>
           <p>{pack[0].description}</p>
+          <FeedFrequency feeds={fetchedFeeds} />
           <DownloadFile feeds={fetchedFeeds} />
         </div>
       </div>
       {/* Main */}
-      <div className="w-full lg:w-3/4 p-4">
+      <div className="w-full lg:w-2/3 p-4">
         <Feeds feeds={fetchedFeeds} />
       </div>
     </div>

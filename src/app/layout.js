@@ -24,9 +24,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Link href="/">Feed it!</Link>&nbsp;
-        <Link href="/packs">Packs</Link>
+        <header className="p-4 uppercase text-lg">
+        <Link href="/">Read Like</Link>&nbsp;
+        </header>
         {children}
+
       </body>
     </html>
   );
