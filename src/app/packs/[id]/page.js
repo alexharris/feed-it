@@ -7,11 +7,14 @@ import Parser from 'rss-parser';
 import Link from 'next/link'
 
 const parser = new Parser();
+
+
 // Tried making my own CORS proxy but it didnt work
 // const CORS_PROXY = "https://cloudflare-cors-anywhere.feedit.workers.dev/"
 // Trying https://corsproxy.io/?
-const CORS_PROXY = "https://corsproxy.io/?"
+// const CORS_PROXY = "https://corsproxy.io/?"
 // maybe I dont need to do this if I run this from the server instead of the client? maybe move to page.js??
+// I did move it to page.js and it doesnt seem to need CORS proxy anymore
 
 async function fetchFeeds(feedIds) {
 
@@ -23,17 +26,24 @@ async function fetchFeeds(feedIds) {
   .in('id', feedIds);
 
   const fetchedFeeds = {};
+
   await Promise.all(feeds.map(async (feed) => {
-    // console.log('promise');
-    const response = await fetch(CORS_PROXY + feed.rss);
+    
+    const response = await fetch(feed.rss);
     const text = await response.text();
-    const parsedFeed = await parser.parseString(text);
+    
+    let parsedFeed;
+    try {
+      parsedFeed = await parser.parseString(text);
+    } catch (error) {
+      console.error(`Failed to parse feed: ${feed.rss}`, error);
+      return; // Skip this feed if parsing fails
+    }
 
     const itemsObject = {};
     parsedFeed.items.forEach((item, index) => {
       itemsObject[index] = item.pubDate;
     });
-
 
 
     //parsedFeed comes from the feed itself
