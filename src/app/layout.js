@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import Link from 'next/link'
 import "./globals.css";
+import { logout } from "./logout/actions";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,8 +25,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="p-4 uppercase text-lg">
-        <Link href="/">Read Like</Link>&nbsp;
+        <header className="p-4 uppercase text-lg flex flex-row justify-between">
+        <Link href="/">Feedbag</Link>
+        <form action={logout}>
+          <button type="submit">
+            Logout
+          </button>
+        </form>
+
         </header>
         {children}
 
