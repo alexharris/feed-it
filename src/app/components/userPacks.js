@@ -12,8 +12,6 @@ export default function UserPacks() {
 
   useEffect(() => {
 
-    
-
     async function getUser() {
       const supabase = await createClient()
 
