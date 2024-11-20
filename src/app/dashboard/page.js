@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import UserPacks from '../components/userPacks'
 
+
 export default async function PrivatePage() {
   
   const supabase = await createClient()
@@ -12,10 +13,12 @@ export default async function PrivatePage() {
     redirect('/login')
   }
 
+
   return (
-    <div>
-      <p>Hello {data.user.email}</p>
+    <div className="p-4">
+      <p>Hello {data.user.email}. Here are your packs:</p>
       <UserPacks />
+      
     </div>
   
   )

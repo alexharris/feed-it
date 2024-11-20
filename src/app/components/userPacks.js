@@ -16,7 +16,7 @@ export default function UserPacks() {
       const supabase = await createClient()
 
       const { data, error } = await supabase.auth.getUser()
-      console.log(data)
+
       if (error || !data?.user) {
         console.log('no user')
       }
@@ -36,10 +36,7 @@ export default function UserPacks() {
       .select("*")
       .eq('user_id', user.id)
       
-      console.log('packs owned by this user:')  
-      console.log(data[0].pack_ids)
       getPackDetails(data[0].pack_ids)
-      // setFeedIds(data[0].pack_ids)
     }
 
     async function getPackDetails(packIds) {
@@ -65,10 +62,8 @@ export default function UserPacks() {
     return <div>No user logged in</div>
   }
 
-  console.log(packData)
   return (
     <div>
-      Hello {user.email}
       {packData && packData.length > 0 ? (
         <ul>
           {packData.map(pack => (
