@@ -3,6 +3,7 @@
 import { createClient } from "@/utils/supabase/client"
 import { useState, useEffect } from "react"
 import supabase from '@/lib/supabaseClient'
+import Link from "next/link"
 
 
 export default function UserPacks() {
@@ -67,7 +68,7 @@ export default function UserPacks() {
       {packData && packData.length > 0 ? (
         <ul>
           {packData.map(pack => (
-            <li key={pack.id}>{pack.title}</li>
+            <li key={pack.id}><Link href={'/dashboard/edit/' + pack.id}>{pack.title}</Link></li>
           ))}
         </ul>
       ) : (

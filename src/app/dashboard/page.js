@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
-import UserPacks from '../components/userPacks'
+import UserPacks from '../components/dashboard/userPacks'
 
 
 export default async function PrivatePage() {

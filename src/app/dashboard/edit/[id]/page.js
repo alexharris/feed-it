@@ -1,6 +1,7 @@
 import React from 'react'
 import supabase from '@/lib/supabaseClient'
 import AddFeedToPack from '@/app/components/dashboard/addFeedToPack'
+import DeleteFeed from '@/app/components/dashboard/deleteFeed'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function Page({ params }) {
@@ -47,7 +48,7 @@ export default async function Page({ params }) {
         <h2>Feeds:</h2>
         <ul>
           {feeds.map(feed => (
-            <li key={feed.id}>{feed.rss}</li>
+            <li key={feed.id}>{feed.rss} <DeleteFeed feedId={feed.id} packId={pack.id} /></li>
           ))}
         </ul>
         <AddFeedToPack user={data.user} packId={pack.id} />

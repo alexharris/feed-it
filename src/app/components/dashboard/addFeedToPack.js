@@ -2,11 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import supabase from '@/lib/supabaseClient'
-import { createClient } from '@/utils/supabase/client'
 
 
 export default function Page(data) {
-
 
   const [feedUrl, setFeedUrl] = useState('');
   const [feeds, setFeeds] = useState([]);
@@ -37,7 +35,6 @@ export default function Page(data) {
     .select('feed_ids')
     .eq('id', id);
 
-
     if (error) {
       console.error('Error adding new feed:', error);
       setError('Error adding new feed');
@@ -47,27 +44,23 @@ export default function Page(data) {
     }
   }
   
-
   async function addFeedIdToPack(feedId, existingFeeds) {
-
-    console.log(feedId)
-    console.log(existingFeeds)
-
     const updatedFeeds = Array.isArray(existingFeeds) ? [...existingFeeds, feedId] : [feedId]
-
-
     const { data, error } = await supabase
       .from('packs')
       .update({ feed_ids: updatedFeeds })
       .eq('id', id);
 
-    // if (error) {
-    //   console.error('Error updating pack:', error);
-    //   setError('Error updating pack');
-    //   return;
-    // }
-  }
+    if (error) {
+      console.error('Error updating pack:', error);
+      setError('Error updating pack');
+      return;
+    } else {
+      location.reload();
+    }
 
+    
+  }
 
   useEffect(() => {
     setUser(user)
@@ -76,19 +69,16 @@ export default function Page(data) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     addNewFeedToFeedsTable(feedUrl)
 
 
   }
 
-
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
+          type="url"
           value={feedUrl}
           onChange={(e) => setFeedUrl(e.target.value)}
           placeholder="Enter feed URL"
