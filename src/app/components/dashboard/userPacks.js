@@ -76,7 +76,7 @@ export default function UserPacks() {
           ))}
         </ul>
       ) : (
-        <div>You don't have any feedbags yet!</div>
+        <div>You don&apos;t have any feedbags yet!</div>
       )}
       <div>
         Add a new feed bag
