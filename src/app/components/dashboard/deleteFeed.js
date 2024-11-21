@@ -28,9 +28,6 @@ export default function Page(data) {
 
   async function deleteFeedFromPack(existingFeeds) {
 
-    console.log(existingFeeds)
-    console.log(packId)
-    console.log(feedId)
     // Delete the feed from the pack
     const updatedFeeds = Array.isArray(existingFeeds) 
     ? existingFeeds.filter(id => id !== feedId) 

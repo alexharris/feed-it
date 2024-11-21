@@ -31,28 +31,32 @@ export default function UserPacks() {
     getUser()
 
     async function getUserPacks(user) {
-
       let { data, error } = await supabase
       .from('user_packs')
       .select("*")
       .eq('user_id', user.id)
-      
-      getPackDetails(data[0].pack_ids)
+
+      if (error) {
+        console.error('Error getting packs:', error);
+        setError('Error adding getting packs');
+        return;
+      } else {
+        if (Array.isArray(data) && data[0] && data[0].pack_ids && data[0].pack_ids.length > 0) {
+          getPackDetails(data[0].pack_ids)
+        } else {
+          console.log('no packs')
+        }
+      }
     }
 
     async function getPackDetails(packIds) {
-      
       let { data, error } = await supabase
       .from('packs')
       .select('*')
-      .in('id', packIds)
-                
+      .in('id', packIds)      
       
       setPackData(data)
     }
-
-    
-    
   },[])
 
   if (loading) {
@@ -72,8 +76,11 @@ export default function UserPacks() {
           ))}
         </ul>
       ) : (
-        <div>No packs found</div>
+        <div>You don't have any feedbags yet!</div>
       )}
+      <div>
+        Add a new feed bag
+      </div>
     </div>
   )
 }
