@@ -33,7 +33,7 @@ export default function UserPacks() {
     async function getUserPacks(user) {
       let { data, error } = await supabase
       .from('user_packs')
-      .select("*")
+      .select('*')
       .eq('user_id', user.id)
 
       if (error) {
