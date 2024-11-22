@@ -2,7 +2,9 @@ import React from 'react'
 import supabase from '@/lib/supabaseClient'
 import AddFeedToPack from '@/app/components/dashboard/addFeedToPack'
 import DeleteFeed from '@/app/components/dashboard/deleteFeed'
+import DeletePack from '@/app/components/dashboard/deletePack'
 import { createClient } from '@/utils/supabase/server'
+import Link from 'next/link'
 
 export default async function Page({ params }) {
 
@@ -45,6 +47,7 @@ export default async function Page({ params }) {
     <div className="p-4">
       <div>
         <h1>{pack.title}</h1>
+        <p><Link href={'/packs/' + pack.id}>View Feed</Link></p>
         <h2>Feeds:</h2>
         <ul>
           {feeds.map(feed => (
@@ -52,6 +55,7 @@ export default async function Page({ params }) {
           ))}
         </ul>
         <AddFeedToPack user={data.user} packId={pack.id} />
+        <DeletePack id={id} />
       </div>
     </div>
   )
