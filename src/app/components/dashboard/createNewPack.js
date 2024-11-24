@@ -11,6 +11,7 @@ export default function Page() {
   const [user, setUser] = useState(null);
   const [packTitle, setPackTitle] = useState('');
   const [loading, setLoading] = useState(true)
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     async function getUser() {
@@ -50,15 +51,11 @@ export default function Page() {
   }
 
   async function getExistingPackArrayForUser(packId) {
-    console.log(packId)
-    console.log(user.id)
 
     const { data, error } = await supabase
     .from('user_packs')
     .select('pack_ids')
     .eq('user_id', user.id);
-
-    console.log(data)
     
     if (error) {
       console.error('Error getting existing packs:', error);
@@ -108,31 +105,30 @@ export default function Page() {
       return;
     } else {
       location.reload();
-    }
-
-            
+    }     
   }
-
-
 
   async function handleSubmit(e) {
     e.preventDefault();
     addPackToPacksTable(packTitle)
   }
 
-  
-
   return (
-    <div className="border border-black p-4 my-4">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={packTitle}
-          onChange={(e) => setPackTitle(e.target.value)}
-          placeholder="Enter pack title"
-        />
-        <button type="submit">Add Pack</button>
-      </form>
+    <div className="inline">
+      <div className='button' onClick={() => setShowForm(!showForm)}>
+        Create New Pack
+      </div>
+      {showForm && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={packTitle}
+            onChange={(e) => setPackTitle(e.target.value)}
+            placeholder="Enter pack title"
+          />
+          <button type="submit">Add Pack</button>
+        </form>
+      )}
     </div>
   );
 }

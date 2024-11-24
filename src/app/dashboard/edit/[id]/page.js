@@ -46,12 +46,19 @@ export default async function Page({ params }) {
   return (
     <div className="p-4">
       <div>
-        <h1>{pack.title}</h1>
-        <p><Link href={'/packs/' + pack.id}>View Feed</Link></p>
-        <h2>Feeds:</h2>
+        <header className="flex flex-col lg:flex-row border-b-2 border-black gap-4 items-start lg:items-center lg:justify-between pb-2 mb-2">
+          <h1>{pack.title}</h1>
+          <button className="button"><Link href={'/packs/' + pack.id}>View Pack</Link></button>
+        </header>
+        <div className="my-6 flex flex-col lg:flex-row justify-between">
+          <div>Description</div>
+          <div>Number of Feeds</div>
+          <div>Average Frequency</div>
+        </div>
+        <h2 className="border-b border-black">Feeds</h2>
         <ul>
           {feeds.map(feed => (
-            <li key={feed.id}>{feed.rss} <DeleteFeed feedId={feed.id} packId={pack.id} /></li>
+            <li className="flex flex-row items-center justify-between border-b border-gray-300 pb-2 my-2" key={feed.id}>{feed.rss} <DeleteFeed feedId={feed.id} packId={pack.id} /></li>
           ))}
         </ul>
         <AddFeedToPack user={data.user} packId={pack.id} />

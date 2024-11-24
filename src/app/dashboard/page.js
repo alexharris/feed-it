@@ -16,25 +16,23 @@ export default async function PrivatePage() {
 
 
   return (
-    <div className="flex flex-col lg:flex-row">
-    {/* Sidebar */}
-    <div className="w-full lg:w-1/3 p-4 lg:pr-0">
-      <div className="bg-blue-100 rounded p-2">
-      <p>Hello {data.user.email}.</p>
-      <form action={logout}>
-        <button type="submit">
-          Logout
-        </button>
-      </form>
+    <div className="p-4">
+      <div className="">
+        <h2 className="border-b-2 border-black">Your Packs</h2>
+        <UserPacks />
+        <CreateNewPack />
       </div>
+      <div className="">
+        <div className="bg-gray-100 p-4 mt-16 rounded">
+          <h2>Account Information</h2>
+        <p className="mb-4">Email: {data.user.email}.</p>
+        <form action={logout}>
+          <button className="button" type="submit">
+            Logout
+          </button>
+        </form>
+        </div>
+      </div>    
     </div>
-    {/* Main */}
-    <div className="w-full lg:w-2/3 p-4">
-      <UserPacks />
-      <CreateNewPack />
-    </div>
-  </div>
-
-  
   )
 }

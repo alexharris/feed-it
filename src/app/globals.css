@@ -7,12 +7,12 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
@@ -21,5 +21,13 @@ body {
 }
 
 .button {
-  @apply border border-blue-600 px-2 rounded text-blue-600;
+  @apply border border-blue-600 px-4 py-2 rounded text-blue-600 inline-block cursor-pointer;
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-2xl pb-2;
 }

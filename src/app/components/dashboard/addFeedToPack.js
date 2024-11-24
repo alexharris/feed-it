@@ -69,7 +69,12 @@ export default function Page(data) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    addNewFeedToFeedsTable(feedUrl)
+    if(feedUrl !== '') {
+      addNewFeedToFeedsTable(feedUrl)
+    } else {
+      console.log('need to enter something')
+    }
+    
 
 
   }
