@@ -2,23 +2,23 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { login } from './actions'
+import { signup } from './actions'
 
-export default function LoginPage() {
+export default function SignupPage() {
 
   const [error, setError] = useState(null)
 
   async function handleSubmit(event) {
     event.preventDefault()
     const formData = new FormData(event.target)
-    const result = await login(formData)
+    const result = await signup(formData)
 
     if (result.error) {
       setError(result.error)
     } else {
       // Handle successful login, e.g., redirect to dashboard
     }
-  }
+  }  
 
   return (
     <div className="max-w-sm mx-auto">
@@ -28,9 +28,9 @@ export default function LoginPage() {
       <label htmlFor="password">Password:</label>
       <input id="password" name="password" type="password" required />
       {error && <div className="bg-red-100 p-4 rounded error">{error}</div>}
-      <button className="button i" formAction={login}>Log in</button>
+      <button className="button i" formAction={signup}>Sign up</button>
       <p>
-        No account? <Link href="/signup">Sign up.</Link>
+        Already have an account? <Link href="/login">Sign in.</Link>
       </p>
     </form>
     </div>
