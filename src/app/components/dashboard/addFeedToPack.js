@@ -69,26 +69,40 @@ export default function Page(data) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if(feedUrl !== '') {
-      addNewFeedToFeedsTable(feedUrl)
-    } else {
-      console.log('need to enter something')
+    const inputElement = document.getElementById('feedUrl');
+    if (!inputElement.checkValidity()) {
+      setError('Please enter a valid URL');
+      return;
     }
+
+    if(feedUrl == '') {
+      setError('Please enter an rss feed');
+      return;
+    }
+
+    addNewFeedToFeedsTable(feedUrl)
     
 
 
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="url"
-          value={feedUrl}
-          onChange={(e) => setFeedUrl(e.target.value)}
-          placeholder="Enter feed URL"
-        />
-        <button type="submit">Add Feed</button>
+    <div className="">
+      
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit} noValidate>
+        <label htmlFor="feedUrl">Add another feed:</label>
+        {error && <div className="text-red-500">{error}</div>}
+        <div className="flex flex-row items-center gap-2">
+          <input
+            type="url"
+            id="feedUrl"
+            value={feedUrl}
+            onChange={(e) => setFeedUrl(e.target.value)}
+            placeholder="Enter feed URL"
+            className="rounded"
+          />
+          <button className="button" type="submit">Add Feed</button>
+        </div>
       </form>
     </div>
   );

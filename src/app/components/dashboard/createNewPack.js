@@ -115,19 +115,25 @@ export default function Page() {
 
   return (
     <div className="inline">
-      <div className='button' onClick={() => setShowForm(!showForm)}>
+      <button className='button disabled:bg-gray-300 disabled:cursor-not-allowed' onClick={() => setShowForm(!showForm)} disabled={showForm} >
         Create New Pack
-      </div>
+      </button>
       {showForm && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={packTitle}
-            onChange={(e) => setPackTitle(e.target.value)}
-            placeholder="Enter pack title"
-          />
-          <button type="submit">Add Pack</button>
-        </form>
+        <div className="border border-gray-400 p-4 rounded mt-4">
+          <h3>Create New Pack</h3>
+          <form className="flex gap-2" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={packTitle}
+              onChange={(e) => setPackTitle(e.target.value)}
+              placeholder="Enter pack title"
+              maxLength="60" // Limit input to 60 characters
+              className="rounded"
+            />
+            <button className="button" type="submit">Create</button>
+            <button className="button"  onClick={() => setShowForm(!showForm)}>Cancel</button>
+          </form>
+        </div>
       )}
     </div>
   );
