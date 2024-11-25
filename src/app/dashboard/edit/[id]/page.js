@@ -3,6 +3,7 @@ import supabase from '@/lib/supabaseClient'
 import AddFeedToPack from '@/app/components/dashboard/addFeedToPack'
 import DeleteFeed from '@/app/components/dashboard/deleteFeed'
 import DeletePack from '@/app/components/dashboard/deletePack'
+import PackDescription from '@/app/components/dashboard/packDescription'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 
@@ -14,7 +15,6 @@ export default async function Page({ params }) {
   if (error || !data?.user) {
     redirect('/login')
   }
-
 
   const id = (await params).id
 
@@ -51,9 +51,11 @@ export default async function Page({ params }) {
           <button className="button"><Link href={'/packs/' + pack.id}>View Pack</Link></button>
         </header>
         <div className="my-6 flex flex-col lg:flex-row justify-between">
-          <div>Description</div>
-          <div>Number of Feeds</div>
-          <div>Average Frequency</div>
+          <div className="w-1/3 text-left text-xl">
+            <PackDescription user={data.user} packId={pack.id} />
+          </div>
+          <div className="w-1/3 text-center">Number of Feeds</div>
+          <div className="w-1/3 text-center">Average Frequency</div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         <ul>
