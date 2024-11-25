@@ -24,6 +24,10 @@ body {
   @apply border border-blue-600 px-4 py-2 rounded text-blue-600 inline-block cursor-pointer;
 }
 
+.icon-link {
+  @apply hover:stroke-blue-600 cursor-pointer;
+}
+
 h1 {
   @apply text-3xl;
 }

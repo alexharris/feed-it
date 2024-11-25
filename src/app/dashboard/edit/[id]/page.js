@@ -46,7 +46,7 @@ export default async function Page({ params }) {
   return (
     <div className="p-4">
       <div>
-        <header className="flex flex-col lg:flex-row border-b-2 border-black gap-4 items-start lg:items-center lg:justify-between pb-2 mb-2">
+        <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
           <h1>{pack.title}</h1>
           <button className="button"><Link href={'/packs/' + pack.id}>View Pack</Link></button>
         </header>
