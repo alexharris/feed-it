@@ -25,8 +25,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="p-4 uppercase text-lg flex flex-row justify-between">
-        <Link href="/">Feed.Computer</Link>
+        <header className="p-4 text-lg flex flex-row justify-between">
+        <Link href="/">FeedComputer</Link>
         <HeaderUser />
 
         </header>

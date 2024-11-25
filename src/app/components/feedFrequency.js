@@ -3,7 +3,7 @@
 import React from 'react';
 
 function calculateFrequency(posts) {
-  console.log(posts);
+
   if (!posts || posts.length === 0) return { monthly: 0 };
 
   const now = new Date();

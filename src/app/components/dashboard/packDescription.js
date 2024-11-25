@@ -78,7 +78,6 @@ export default function Page(data) {
       {editDescription && (
       <div>
         <form className="flex flex-col gap-2" onSubmit={handleSubmit} noValidate>
-          
           {error && <div className="text-red-500">{error}</div>}
           <div className="flex flex-col items-start gap-2">
             <textarea

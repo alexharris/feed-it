@@ -6,6 +6,7 @@ import DeletePack from '@/app/components/dashboard/deletePack'
 import PackDescription from '@/app/components/dashboard/packDescription'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
+import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
 
 export default async function Page({ params }) {
 
@@ -54,7 +55,7 @@ export default async function Page({ params }) {
           <div className="w-1/3 text-left text-xl">
             <PackDescription user={data.user} packId={pack.id} />
           </div>
-          <div className="w-1/3 text-center">Number of Feeds</div>
+          <div className="w-1/3 text-center"><NumberOfFeeds packId={pack.id} /></div>
           <div className="w-1/3 text-center">Average Frequency</div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
