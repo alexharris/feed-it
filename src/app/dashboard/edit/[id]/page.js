@@ -7,6 +7,7 @@ import PackDescription from '@/app/components/dashboard/packDescription'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
+import AverageDailyPosts from '@/app/components/widgets/averageDailyPosts'
 
 export default async function Page({ params }) {
 
@@ -56,7 +57,7 @@ export default async function Page({ params }) {
             <PackDescription user={data.user} packId={pack.id} />
           </div>
           <div className="w-1/3 text-center"><NumberOfFeeds packId={pack.id} /></div>
-          <div className="w-1/3 text-center">Average Frequency</div>
+          <div className="w-1/3 text-center"><AverageDailyPosts packId={pack.id} /></div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         <ul>

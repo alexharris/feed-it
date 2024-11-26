@@ -19,7 +19,7 @@ export default function Page(data) {
 
 
   async function getPackDescription() {
-    console.log('getpackdescriptiuon')
+    // console.log('getpackdescriptiuon')
     // Add the new feed to the feeds table
     const { data, error } = await supabase
       .from('packs')

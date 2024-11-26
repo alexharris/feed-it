@@ -10,7 +10,7 @@ export default function NumberOfFeeds(packId) {
   const [numberOfFeeds, setNumberOfFeeds] = useState(null);
 
   async function getNumberOfFeeds() {
-    console.log(packId.packId)
+    
     const { data, error } = await supabase
       .from('packs')
       .select('feed_ids')
