@@ -1,11 +1,14 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import supabase from '@/lib/supabaseClient'
 
 
-export default function Page(data) {
 
+export default function Page(data) {
+  
+  const router = useRouter();
   const [feedUrl, setFeedUrl] = useState('');
   const [feeds, setFeeds] = useState([]);
   const [error, setError] = useState(null);
@@ -56,7 +59,7 @@ export default function Page(data) {
       setError('Error updating pack');
       return;
     } else {
-      location.reload();
+      location.reload()
     }
 
     
@@ -81,9 +84,6 @@ export default function Page(data) {
     }
 
     addNewFeedToFeedsTable(feedUrl)
-    
-
-
   }
 
   return (

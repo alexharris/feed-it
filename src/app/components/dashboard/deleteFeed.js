@@ -1,11 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import supabase from '@/lib/supabaseClient'
 
 
 export default function Page(data) {
 
+  const router = useRouter();
   const [user, setUser] = useState(null);
 
   const packId = data.packId
@@ -44,7 +46,7 @@ export default function Page(data) {
       setError('Error updating pack');
       return;
     } else {
-      location.reload();
+      location.reload()
     }
   }   
 

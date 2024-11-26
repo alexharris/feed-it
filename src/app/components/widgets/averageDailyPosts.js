@@ -1,17 +1,20 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import supabase from '@/lib/supabaseClient'
-import Parser from 'rss-parser';
+import {fetchPostsFromFeeds} from '@/app/components/widgets/adpServer'
+import { useRouter } from 'next/navigation';
 
-// Needs to be server because CORS
 
 
-// import { parseFeeds } from '@/utils/supabase/parseFeeds';
-
-const parser = new Parser();
 
 let totalAverage = ''
 
 export default function AverageDailyPosts(packId) {
+
+  const router = useRouter();
+
+  const [average, setAverage] = useState(0)
 
   async function getFeedIdsFromPack() {
 
@@ -25,52 +28,15 @@ export default function AverageDailyPosts(packId) {
       setError('Error getting number of feeds');
       return;
     } else {
-      fetchPostsFromFeeds(feedIds[0].feed_ids)
+      let fetchedFeeds = await fetchPostsFromFeeds(feedIds[0].feed_ids)
+      calculateFrequency(fetchedFeeds)
+      
     }
   }     
 
-  async function fetchPostsFromFeeds(feedIds) {
-
-    const fetchedFeeds = {};
-
-    let { data: feeds, error } = await supabase
-    .from('feeds')
-    .select('*')
-    .in('id', feedIds);
-
-    await Promise.all(feeds.map(async (feed) => {
-      
-      const response = await fetch(feed.rss);
-      const text = await response.text();
-
-      let parsedFeed;
-      try {
-        parsedFeed = await parser.parseString(text);
-      } catch (error) {
-        console.error(`Failed to parse feed: ${feed.rss}`, error);
-        return; // Skip this feed if parsing fails
-      }
-  
-      const itemDates = {};
-      parsedFeed.items.forEach((item, index) => {
-        itemDates[index] = item.pubDate;
-      });
-  
-  
-      fetchedFeeds[feed.id] = {
-        title: parsedFeed.title,
-        description: parsedFeed.description,
-        url: parsedFeed.link,
-        rss: parsedFeed.feedUrl,
-        itemDates: itemDates
-      };
-    }));
-
-    calculateFrequency(fetchedFeeds)
-  }
-
   function calculateFrequency(fetchedFeeds) {
     console.log('calculate freq');
+    console.log(fetchedFeeds)
     const averages = {}
     
     //go througheach of the fetched feeds
@@ -91,13 +57,19 @@ export default function AverageDailyPosts(packId) {
       averages[feedId] = totalPosts / totalDays;
     }
 
-
     totalAverage = Object.values(averages).reduce((acc, avg) => acc + avg, 0) / Object.keys(averages).length;
     totalAverage = totalAverage.toFixed(2);
+    setAverage(totalAverage)
+  
   }
   
 
-  getFeedIdsFromPack()
+
+  useEffect(() => {
+    getFeedIdsFromPack()
+    calculateFrequency()
+    
+  }, []);
 
 
 
