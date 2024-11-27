@@ -35,8 +35,7 @@ export default function AverageDailyPosts(packId) {
   }     
 
   function calculateFrequency(fetchedFeeds) {
-    console.log('calculate freq');
-    console.log(fetchedFeeds)
+
     const averages = {}
     
     //go througheach of the fetched feeds
@@ -68,7 +67,6 @@ export default function AverageDailyPosts(packId) {
   useEffect(() => {
     getFeedIdsFromPack()
     calculateFrequency()
-    
   }, []);
 
 

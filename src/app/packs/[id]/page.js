@@ -5,9 +5,10 @@ import DownloadFile from '@/app/components/downloadFile'
 import FeedFrequency from '@/app/components/feedFrequency'
 import Parser from 'rss-parser';
 import Link from 'next/link'
+import AverageDailyPosts from '@/app/components/widgets/averageDailyPosts';
+import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds';
 
 const parser = new Parser();
-
 
 // Tried making my own CORS proxy but it didnt work
 // const CORS_PROXY = "https://cloudflare-cors-anywhere.feedit.workers.dev/"
@@ -17,8 +18,6 @@ const parser = new Parser();
 // I did move it to page.js and it doesnt seem to need CORS proxy anymore
 
 async function fetchFeeds(feedIds) {
-
-  console.log('fetchedFeeds function');
 
   let { data: feeds, error } = await supabase
   .from('feeds')
@@ -72,16 +71,17 @@ export default async function Page({ params }) {
   const feedIds = pack[0].feed_ids;
 
   const fetchedFeeds = await fetchFeeds(feedIds);
+  
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Sidebar */}
       <div className="w-full lg:w-1/3 p-4 lg:pr-0">
-        <div className="bg-blue-100 rounded p-2">
-          <h1 className="text-lg font-semibold">{pack[0].title}</h1>
-          <p>{pack[0].description}</p>
-          <FeedFrequency feeds={fetchedFeeds} />
-          <DownloadFile feeds={fetchedFeeds} />
-        </div>
+        <h1 className="text-lg font-semibold">{pack[0].title}</h1>
+        <p>{pack[0].description}</p>
+        <FeedFrequency feeds={fetchedFeeds} />
+        <NumberOfFeeds packId={id}/>
+        <AverageDailyPosts packId={id} />
+        <DownloadFile feeds={fetchedFeeds} />
       </div>
       {/* Main */}
       <div className="w-full lg:w-2/3 p-4">

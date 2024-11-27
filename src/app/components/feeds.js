@@ -21,6 +21,7 @@ function GetCadence(posts) {
 
 
 function RenderFeeds({ feeds }) {
+  console.log(feeds)
   return (
     <div>
       {Object.values(feeds.feeds).map((feed, index) => (
