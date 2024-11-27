@@ -7,6 +7,7 @@ import Parser from 'rss-parser';
 import Link from 'next/link'
 import AverageDailyPosts from '@/app/components/widgets/averageDailyPosts';
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds';
+import PackDescription from '@/app/components/dashboard/packDescription'
 
 const parser = new Parser();
 
@@ -73,18 +74,20 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
   
   return (
-    <div className="flex flex-col lg:flex-row">
-      {/* Sidebar */}
-      <div className="w-full lg:w-1/3 p-4 lg:pr-0">
-        <h1 className="text-lg font-semibold">{pack[0].title}</h1>
-        <p>{pack[0].description}</p>
-        <FeedFrequency feeds={fetchedFeeds} />
-        <NumberOfFeeds packId={id}/>
-        <AverageDailyPosts packId={id} />
+    <div className="flex flex-col p-4">
+      <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
+        <h1>{pack[0].title}</h1>
         <DownloadFile feeds={fetchedFeeds} />
-      </div>
+      </header>      
+      <div className="my-12 flex flex-col lg:flex-row justify-between">
+          <div className="w-1/3 text-left text-2xl">
+            {pack[0].description}
+          </div>
+          <div className="w-1/3 text-center"><NumberOfFeeds packId={pack[0].id} /></div>
+          <div className="w-1/3 text-center"><AverageDailyPosts packId={pack[0].id} /></div>
+        </div>
       {/* Main */}
-      <div className="w-full lg:w-2/3 p-4">
+      <div className="w-full border-t border-black">
         <Feeds feeds={fetchedFeeds} />
       </div>
     </div>
