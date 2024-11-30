@@ -22,7 +22,7 @@ export async function fetchPostsFromRssUrl(feeds) {
       console.error(`Failed to parse feed: ${feed}`, error);
       return; // Skip this feed if parsing fails
     }
-    console.log('parsed!');
+    console.log('parsed!:' + feed);
 
 
     const itemDates = {};

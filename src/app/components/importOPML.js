@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { fetchPostsFromRssUrl } from '@/app/components/fetchPostsFromRssUrl'
 import Link from 'next/link'
+import { calculateAverageDailyPosts } from '@/utils/tools'
 
 const fetchedFeeds = []
 
@@ -13,7 +14,9 @@ export default function ImportOPML() {
   async function getFetchedFeeds(feeds) {
     const fetchedFeeds = await fetchPostsFromRssUrl(feeds)
     const fetchedFeedsArray = Array.isArray(fetchedFeeds) ? fetchedFeeds : [fetchedFeeds];
+    console.log(fetchedFeedsArray)
     setRssFeeds(fetchedFeedsArray)
+    
   }
 
 
@@ -80,7 +83,7 @@ export default function ImportOPML() {
                   {rssFeeds[0][key].title}
                 </div>
                 <div className="w-full md:w-1/5 self-start">
-                  {/* Additional content can go here */}
+                 {calculateAverageDailyPosts(rssFeeds[0][key].itemDates)} posts / day
                 </div>
                 <div className="flex flex-row gap-4 w-full md:w-1/5 justify-end">
                   <Link target="_blank" href={rssFeeds[0][key].rss}><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></Link>
