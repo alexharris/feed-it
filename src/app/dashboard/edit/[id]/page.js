@@ -50,14 +50,14 @@ export default async function Page({ params }) {
       <div>
         <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
           <h1>{pack.title}</h1>
-          <button className="button"><Link href={'/packs/' + pack.id}>View Pack</Link></button>
+          <Link href={'/packs/' + pack.id}><button className="button">View Pack</button></Link>
         </header>
-        <div className="my-6 flex flex-col lg:flex-row justify-between">
-          <div className="w-1/3 text-left text-xl">
+        <div className="my-6 flex flex-col md:flex-row justify-between">
+          <div className="w-full md:w-1/3 text-left text-xl">
             <PackDescription user={data.user} packId={pack.id} />
           </div>
-          <div className="w-1/3 text-center"><NumberOfFeeds packId={pack.id} /></div>
-          <div className="w-1/3 text-center"><AverageDailyPosts packId={pack.id} /></div>
+          <div className="w-full md:w-1/3 text-center"><NumberOfFeeds packId={pack.id} /></div>
+          <div className="w-full md:w-1/3 text-center"><AverageDailyPosts packId={pack.id} /></div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         <ul>

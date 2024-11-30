@@ -69,7 +69,7 @@ export default function Page(data) {
   }
 
   return (
-    <div className="">
+    <div className="flex flex-row justify-between">
       {!editDescription && (
       <div>
         {description} 
@@ -77,7 +77,7 @@ export default function Page(data) {
       )}
       {editDescription && (
       <div>
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit} noValidate>
+        <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit} noValidate>
           {error && <div className="text-red-500">{error}</div>}
           <div className="flex flex-col items-start gap-2">
             <textarea

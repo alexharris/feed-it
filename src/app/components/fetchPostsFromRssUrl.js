@@ -1,41 +1,36 @@
 'use server'
 
-import supabase from '@/lib/supabaseClient'
 import Parser from 'rss-parser';
-
 
 const parser = new Parser();
 
+export async function fetchPostsFromRssUrl(feeds) {
 
-export async function fetchPostsFromFeeds(feedIds) {
+
 
   const fetchedFeeds = {};
 
-  let { data: feeds, error } = await supabase
-  .from('feeds')
-  .select('*')
-  .in('id', feedIds);
+  await Promise.all(feeds.map(async (feed, index) => {
 
-  await Promise.all(feeds.map(async (feed) => {
-    
-    const response = await fetch(feed.rss);
+    const response = await fetch(feed);
     const text = await response.text();
-
+    
     let parsedFeed;
     try {
       parsedFeed = await parser.parseString(text);
     } catch (error) {
-      console.error(`Failed to parse feed: ${feed.rss}`, error);
+      console.error(`Failed to parse feed: ${feed}`, error);
       return; // Skip this feed if parsing fails
     }
+    console.log('parsed!');
+
 
     const itemDates = {};
     parsedFeed.items.forEach((item, index) => {
       itemDates[index] = item.pubDate;
     });
-
-
-    fetchedFeeds[feed.id] = {
+    
+    fetchedFeeds[index] = {
       title: parsedFeed.title,
       description: parsedFeed.description,
       url: parsedFeed.link,
@@ -44,6 +39,8 @@ export async function fetchPostsFromFeeds(feedIds) {
     };
   }));
 
+  console.log(fetchedFeeds)
 
-  return fetchedFeeds
+  return fetchedFeeds;
+
 }

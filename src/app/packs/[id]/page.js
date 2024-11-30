@@ -45,7 +45,6 @@ async function fetchFeeds(feedIds) {
       itemsObject[index] = item.pubDate;
     });
 
-
     //parsedFeed comes from the feed itself
     //feed comes from the db
     fetchedFeeds[feed.id] = {
