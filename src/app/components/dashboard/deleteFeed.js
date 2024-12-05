@@ -48,17 +48,11 @@ export default function Page(data) {
     }
   }   
 
-  
   useEffect(() => {
     setUser(user)
     setFeedId(data.feedId)
     setPackId(data.packId)
   }, [user])
-
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   deleteFeedFromPack(feedUrl)
-  // }
 
   return (
     <div className="inline">
