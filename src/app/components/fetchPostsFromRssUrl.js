@@ -4,9 +4,9 @@ import Parser from 'rss-parser';
 
 const parser = new Parser();
 
-export async function fetchPostsFromRssUrl(feeds) {
+export async function fetchPostsFromRssUrl(feedRss) {
 
-
+  const feeds = [feedRss]
 
   const fetchedFeeds = {};
 
@@ -39,7 +39,6 @@ export async function fetchPostsFromRssUrl(feeds) {
     };
   }));
 
-  console.log(fetchedFeeds)
 
   return fetchedFeeds;
 

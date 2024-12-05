@@ -7,7 +7,7 @@ import supabase from '@/lib/supabaseClient'
 export default function NumberOfFeeds(packId) {
 
   const [error, setError] = useState(null);
-  const [numberOfFeeds, setNumberOfFeeds] = useState(null);
+  const [numberOfFeeds, setNumberOfFeeds] = useState(0);
 
   async function getNumberOfFeeds() {
     
@@ -21,7 +21,12 @@ export default function NumberOfFeeds(packId) {
       setError('Error getting number of feeds');
       return;
     } else {
-      setNumberOfFeeds(data[0].feed_ids.length)
+      if(data[0].feed_ids && data[0].feed_ids.length > 0) {
+        setNumberOfFeeds(data[0].feed_ids.length)
+      } else {
+        setNumberOfFeeds(0)
+      }
+      
     }
   }     
 

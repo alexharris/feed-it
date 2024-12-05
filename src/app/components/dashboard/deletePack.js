@@ -99,9 +99,7 @@ export default function Page({id}) {
   
 
   return (
-    <div className="bg-gray-100 p-4 mt-16 rounded">
-      <h2>Pack Details</h2>
-      <p className="pb-4">Pack created: </p>
+    <div className="border border-red-400 p-4 mt-16 rounded">
       <form onSubmit={handleSubmit}>
         <button className="button" type="submit">Delete Pack</button>
       </form>

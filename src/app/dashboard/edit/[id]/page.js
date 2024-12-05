@@ -8,6 +8,8 @@ import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
 import AverageDailyPosts from '@/app/components/widgets/averageDailyPosts'
+import DisplayFetchedFeeds from '@/app/components/displayFetchedFeedsRow'
+
 
 export default async function Page({ params }) {
 
@@ -19,6 +21,7 @@ export default async function Page({ params }) {
   }
 
   const id = (await params).id
+  let rssFeedUrls = []
 
   // Fetch the pack data
   let { data: pack, error: packError } = await supabase
@@ -33,17 +36,22 @@ export default async function Page({ params }) {
   }
 
   const feedIds = pack.feed_ids
-  
+
   // Fetch the feed details
   let { data: feeds, error: feedsError } = await supabase
     .from('feeds')
     .select('*')
     .in('id', feedIds)
 
+  
   if (feedsError) {
     console.error('Error fetching feeds:', feedsError)
     return <div>Error fetching feeds</div>
+  } else {
+    rssFeedUrls = feeds.map(feed => feed.rss);
+    
   }
+
 
   return (
     <div className="p-4">
@@ -60,12 +68,11 @@ export default async function Page({ params }) {
           <div className="w-full md:w-1/3 text-center"><AverageDailyPosts packId={pack.id} /></div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
-        <ul>
-          {feeds.map(feed => (
-            <li className="flex flex-row items-center justify-between border-b border-gray-300 pb-2 my-2" key={feed.id}>{feed.rss} <DeleteFeed feedId={feed.id} packId={pack.id} /></li>
-          ))}
-        </ul>
+        {feeds.map(feed => (
+          <DisplayFetchedFeeds feedRss={feed.rss} feedId={feed.id} user={data.user} packId={pack.id} />
+        ))}      
         <AddFeedToPack user={data.user} packId={pack.id} />
+        {/* <ImportFeedsFromOpml packId={pack.id} /> */}
         <DeletePack id={id} />
       </div>
     </div>
