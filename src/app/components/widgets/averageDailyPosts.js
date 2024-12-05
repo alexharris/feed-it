@@ -4,11 +4,10 @@ import React, { useEffect, useState } from 'react';
 import supabase from '@/lib/supabaseClient'
 import {fetchPostsFromFeeds} from '@/app/components/widgets/adpServer'
 import { useRouter } from 'next/navigation';
+import { calculateAverageDailyPosts } from '@/utils/tools';
 
 
 
-
-let totalAverage = ''
 
 export default function AverageDailyPosts(packId) {
 
@@ -29,55 +28,40 @@ export default function AverageDailyPosts(packId) {
       return;
     } else {
       let fetchedFeeds = await fetchPostsFromFeeds(feedIds[0].feed_ids)
+      console.log('Calculate Frequency')
       calculateFrequency(fetchedFeeds)
       
     }
   }     
 
-  function calculateFrequency(fetchedFeeds) {
+  let totalPosts = 0
 
-    const averages = {}
-    
+  function calculateFrequency(fetchedFeeds) {
     //go througheach of the fetched feeds
     for (const feedId in fetchedFeeds) {
    
       const feed = fetchedFeeds[feedId];
       const itemDates = Object.values(feed.itemDates);
+      const dailyPosts = calculateAverageDailyPosts(itemDates)      
+      
+      totalPosts += parseFloat(dailyPosts);
+      
+      setAverage(totalPosts);
 
-      const dateCounts = itemDates.reduce((acc, date) => {
-        const day = new Date(date).toDateString();
-        acc[day] = (acc[day] || 0) + 1;
-        return acc;
-      }, {});
-
-      const totalDays = Object.keys(dateCounts).length;
-      const totalPosts = itemDates.length;
-
-      averages[feedId] = totalPosts / totalDays;
     }
-
-    totalAverage = Object.values(averages).reduce((acc, avg) => acc + avg, 0) / Object.keys(averages).length;
-    totalAverage = totalAverage.toFixed(2);
-    setAverage(totalAverage)
-  
   }
   
-
-
   useEffect(() => {
     getFeedIdsFromPack()
     calculateFrequency()
   }, []);
 
-
-
-
   return (
     <div className="flex flex-row-reverse md:flex-col justify-between border-none md:border-b border-gray-300 py-2">
       <div className="md:text-7xl">
-        {totalAverage}
+        {average}
       </div>
-      <div className="font-bold">Average Daily Posts</div>
+      <div className="font-bold">Posts Per Day</div>
     </div>
   )
 }

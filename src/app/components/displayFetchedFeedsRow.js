@@ -30,7 +30,6 @@ export default function DisplayFetchedFeeds({ feedRss, packId, feedId, user }) {
       {rssFeed[0] && 
         <div className="flex flex-row w-full items-start justify-between border-b border-gray-300 py-2 my-2">
           <div className="w-full md:w-3/5">
-          {console.log(rssFeed)}
             <div className="font-bold">{rssFeed[0].title}</div>
             <div className="text-gray-500 text-sm">{rssFeed[0].rss}</div>
           </div>
