@@ -69,7 +69,7 @@ export default async function Page({ params }) {
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         {feeds.map(feed => (
-          <DisplayFetchedFeeds feedRss={feed.rss} feedId={feed.id} user={data.user} packId={pack.id} />
+          <DisplayFetchedFeeds key={feed.id} feedRss={feed.rss} feedId={feed.id} user={data.user} packId={pack.id} />
         ))}      
         <AddFeedToPack user={data.user} packId={pack.id} />
         {/* <ImportFeedsFromOpml packId={pack.id} /> */}

@@ -6,7 +6,7 @@ import supabase from '@/lib/supabaseClient'
 
 
 
-export default function importFeedsFromOpml(packId) {
+export default function ImportFeedsFromOpml(packId) {
   const [fileUploaded, setFileUploaded] = useState(false)
 
   function handleFileUpload(event) {
