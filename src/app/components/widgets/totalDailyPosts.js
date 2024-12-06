@@ -6,10 +6,9 @@ import {fetchPostsFromFeeds} from '@/app/components/widgets/adpServer'
 import { useRouter } from 'next/navigation';
 import { calculateAverageDailyPosts } from '@/utils/tools';
 
-
-
-
 export default function AverageDailyPosts(packId) {
+
+  console.log('TOTAL DAILY POSTS WIDGET')
 
   const router = useRouter();
 
@@ -28,7 +27,7 @@ export default function AverageDailyPosts(packId) {
       return;
     } else {
       let fetchedFeeds = await fetchPostsFromFeeds(feedIds[0].feed_ids)
-      console.log('Calculate Frequency')
+    
       calculateFrequency(fetchedFeeds)
       
     }
@@ -45,15 +44,17 @@ export default function AverageDailyPosts(packId) {
       const dailyPosts = calculateAverageDailyPosts(itemDates)      
       
       totalPosts += parseFloat(dailyPosts);
-      
-      setAverage(totalPosts);
-
     }
+
+    setAverage(totalPosts.toFixed(2));
   }
   
   useEffect(() => {
+    setAverage(0)
+    console.log('total daily posts use effect')
     getFeedIdsFromPack()
-    calculateFrequency()
+    
+    
   }, []);
 
   return (

@@ -23,7 +23,6 @@ export default function Page() {
         console.log('no user')
       }
       else {
-        console.log(data)
         setUser(data.user)
       }
       setLoading(false)

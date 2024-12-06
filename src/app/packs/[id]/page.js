@@ -5,7 +5,7 @@ import DownloadFile from '@/app/components/downloadFile'
 import FeedFrequency from '@/app/components/feedFrequency'
 import Parser from 'rss-parser';
 import Link from 'next/link'
-import AverageDailyPosts from '@/app/components/widgets/averageDailyPosts';
+import AverageDailyPosts from '@/app/components/widgets/totalDailyPosts';
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds';
 import PackDescription from '@/app/components/dashboard/packDescription'
 
