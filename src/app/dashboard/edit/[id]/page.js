@@ -8,7 +8,7 @@ import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
 import TotalDailyPosts from '@/app/components/widgets/totalDailyPosts'
-import DisplayFetchedFeeds from '@/app/components/displayFetchedFeedsRow'
+import DisplayFetchedFeedRow from '@/app/components/displayFetchedFeedRow'
 
 
 export default async function Page({ params }) {
@@ -70,7 +70,7 @@ export default async function Page({ params }) {
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         {feeds.map(feed => (
-          <DisplayFetchedFeeds key={feed.id} feedRss={feed.rss} feedId={feed.id} user={data.user} packId={pack.id} />
+          <DisplayFetchedFeedRow key={feed.id} feedRss={feed.rss} feedId={feed.id} user={data.user} packId={pack.id} />
         ))}      
         <AddFeedToPack user={data.user} packId={pack.id} />
         {/* <ImportFeedsFromOpml packId={pack.id} /> */}
