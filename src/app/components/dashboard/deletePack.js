@@ -11,18 +11,15 @@ export default function Page({id}) {
   const [packTitle, setPackTitle] = useState('');
   const [loading, setLoading] = useState(true)
 
+  const supabase = createClient()
 
   useEffect(() => {
     async function getUser() {
-      const supabase = await createClient()
-  
       const { data, error } = await supabase.auth.getUser()
-  
       if (error || !data?.user) {
         console.log('no user')
       }
       else {
-        // console.log(data)
         setUser(data.user)
       }
       setLoading(false)
@@ -49,7 +46,7 @@ export default function Page({id}) {
 
   async function getExistingPackArrayForUser(packId) {
     console.log(packId)
-    console.log(user.id)
+    // console.log(user.id)
 
     const { data, error } = await supabase
     .from('user_packs')

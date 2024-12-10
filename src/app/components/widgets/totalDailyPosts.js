@@ -8,7 +8,7 @@ import { calculateAverageDailyPosts } from '@/utils/tools';
 
 export default function AverageDailyPosts(packId) {
 
-  console.log('TOTAL DAILY POSTS WIDGET')
+  // console.log('TOTAL DAILY POSTS WIDGET')
 
   const router = useRouter();
 
@@ -51,15 +51,15 @@ export default function AverageDailyPosts(packId) {
   
   useEffect(() => {
     setAverage(0)
-    console.log('total daily posts use effect')
+    // console.log('total daily posts use effect')
     getFeedIdsFromPack()
     
     
   }, []);
 
   return (
-    <div className="flex flex-row-reverse md:flex-col justify-between border-none md:border-b border-gray-300 py-2">
-      <div className="md:text-7xl">
+    <div className="flex flex-row-reverse md:flex-col justify-between border-none md:border-b border-gray-300 py-2 text-center">
+      <div className="md:text-4xl">
         {average}
       </div>
       <div className="font-bold">Posts Per Day</div>

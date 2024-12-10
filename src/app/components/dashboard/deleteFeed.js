@@ -2,15 +2,39 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import supabase from '@/lib/supabaseClient'
+import { createClient } from "@/utils/supabase/client"
 
 
 export default function Page(data) {
 
-  const router = useRouter();
   const [user, setUser] = useState(null);
   const [feedId, setFeedId] = useState(null);
   const [packId, setPackId] = useState(null);
+  const [loading, setLoading] = useState(null);
+
+  const supabase = createClient()
+
+  useEffect(() => {
+
+    async function getUser() {
+      const { data, error } = await supabase.auth.getUser()
+      if (error || !data?.user) {
+        console.log('no user')
+      }
+      else {
+        console.log(data.user)
+        setUser(data.user)
+      }
+      setLoading(false)
+    }
+
+    getUser()
+
+
+    setFeedId(data.feedId)
+    setPackId(data.packId)
+  }, [])
+
 
   async function getExistingFeedArrayInPack(feedId) {
 
@@ -44,15 +68,10 @@ export default function Page(data) {
       setError('Error updating pack');
       return;
     } else {
-      location.reload()
+      // location.reload()
     }
   }   
 
-  useEffect(() => {
-    setUser(user)
-    setFeedId(data.feedId)
-    setPackId(data.packId)
-  }, [user])
 
   return (
     <div className="inline">

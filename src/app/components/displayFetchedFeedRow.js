@@ -16,6 +16,7 @@ export default function DisplayFetchedFeeds({ feedRss, packId, feedId, user }) {
   const [loading, setLoading] = useState(true)
 
   useEffect( () => {
+    // console.log('display fetched feed row');
    
     async function getFetchedFeeds(feedRss) {
       const fetchedFeeds = await fetchPostsFromRssUrl(feedRss)

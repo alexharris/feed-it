@@ -2,19 +2,38 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import supabase from '@/lib/supabaseClient'
+import { createClient } from "@/utils/supabase/client"
 
 
 
 export default function Page(data) {
-  
+
   const router = useRouter();
   const [feedUrl, setFeedUrl] = useState('');
   const [feeds, setFeeds] = useState([]);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   const id = data.packId
+  const supabase = createClient()
+
+  useEffect(() => {
+    async function getUser() {
+      const { data, error } = await supabase.auth.getUser()
+      if (error || !data?.user) {
+        console.log('no user')
+      }
+      else {
+        console.log(data.user)
+        setUser(data.user)
+      }
+      setLoading(false)
+    }
+
+    getUser()
+
+  }, [])  
 
   async function addNewFeedToFeedsTable(feedUrl) {
     // Add the new feed to the feeds table
@@ -43,12 +62,16 @@ export default function Page(data) {
       setError('Error adding new feed');
       return;
     } else {
+      
       addFeedIdToPack(feedId, data[0].feed_ids)
     }
   }
   
   async function addFeedIdToPack(feedId, existingFeeds) {
+    console.log('ADD FEED TO PACK');
     const updatedFeeds = Array.isArray(existingFeeds) ? [...existingFeeds, feedId] : [feedId]
+
+    
     const { data, error } = await supabase
       .from('packs')
       .update({ feed_ids: updatedFeeds })
@@ -65,12 +88,11 @@ export default function Page(data) {
     
   }
 
-  useEffect(() => {
-    setUser(user)
-  }, [user])
+
 
 
   async function handleSubmit(e) {
+    
     e.preventDefault();
     const inputElement = document.getElementById('feedUrl');
     if (!inputElement.checkValidity()) {

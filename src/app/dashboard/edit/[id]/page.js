@@ -9,6 +9,7 @@ import Link from 'next/link'
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
 import TotalDailyPosts from '@/app/components/widgets/totalDailyPosts'
 import DisplayFetchedFeedRow from '@/app/components/displayFetchedFeedRow'
+import { redirect } from 'next/navigation'
 
 
 export default async function Page({ params }) {
@@ -17,8 +18,8 @@ export default async function Page({ params }) {
 
   const { data, error } = await supabase.auth.getUser()
   if (error || !data?.user) {
-    redirect('/login')
-  }
+    redirect('/')
+  }  
 
   const id = (await params).id
   let rssFeedUrls = []
@@ -33,7 +34,11 @@ export default async function Page({ params }) {
   if (packError) {
     console.error('Error fetching pack:', packError)
     return <div>Error fetching pack</div>
+  } else if (data.user.id != pack.user_id) {
+    redirect('/login') 
   }
+
+ 
 
   const feedIds = pack.feed_ids
 
