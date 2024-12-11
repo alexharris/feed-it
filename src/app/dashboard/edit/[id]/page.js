@@ -4,6 +4,7 @@ import AddFeedToPack from '@/app/components/dashboard/addFeedToPack'
 import DeleteFeed from '@/app/components/dashboard/deleteFeed'
 import DeletePack from '@/app/components/dashboard/deletePack'
 import PackDescription from '@/app/components/dashboard/packDescription'
+import PackTitle from '@/app/components/dashboard/packTitle'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds'
@@ -63,7 +64,7 @@ export default async function Page({ params }) {
     <div className="p-4">
       <div>
         <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
-          <h1>{pack.title}</h1>
+          <PackTitle user={data.user} packId={pack.id} />
           <Link href={'/packs/' + pack.id}><button className="button">View Pack</button></Link>
         </header>
         <div className="my-6 flex flex-col md:flex-row justify-between">

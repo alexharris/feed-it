@@ -9,8 +9,8 @@ export default function PackCard(packId) {
   const [packData, setPackData] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log('pack card')
-  console.log(packId.packId)
+  // console.log('pack card')
+  // console.log(packId.packId)
 
   async function getFeedInfo() {
     let { data, error } = await supabase
@@ -32,7 +32,7 @@ export default function PackCard(packId) {
   }, []);
 
   return (
-    <div className="w-96 bg-white flex flex-col justify-between border border-black p-4 rounded items-start">
+    <div className="w-96 bg-white flex flex-col justify-between border border-black p-4 rounded-xl items-start">
       <h3 className="text-2xl">{packData ? packData.title : 'Loading...'}</h3>
       <span className="text-xl">{packData ? packData.description : 'Loading...'}</span>
       <div className="flex flex-row justify-between w-full py-6 border border-gray-100 rounded-xl p-4 my-6">
