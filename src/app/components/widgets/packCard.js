@@ -34,7 +34,7 @@ export default function PackCard(packId) {
   return (
     <div className="w-full lg:w-1/3 bg-white flex flex-col border border-black rounded-xl items-start text-black">
       <div className="border-b border-black w-full p-4 flex flex-row justify-between items-start">
-        <h3 className="text-lg w-3/5 pb-0">{packData ? packData.title : 'Loading...'}</h3>
+        <h3 className="text-2xl w-3/5 pb-0 thermo">{packData ? packData.title : 'Loading...'}</h3>
         <a className="border border-gray-200 p-2 px-4 flex flex-col justify-center rounded-full text-sm hover:bg-gray-100" href={`/packs/${packId.packId}`}>View Pack</a>
       </div>
       <div className="flex flex-row justify-start gap-8 w-full p-4">

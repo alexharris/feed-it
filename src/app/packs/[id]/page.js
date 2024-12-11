@@ -73,20 +73,24 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
   
   return (
-    <div className="flex flex-col p-4">
-      <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2">
-        <h1>{pack[0].title}</h1>
+    <div className="flex flex-col p-4 mt-8">
+      <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between pb-2">
+        <h1 className="thermo text-5xl">{pack[0].title}</h1>
         <DownloadFile feeds={fetchedFeeds} />
       </header>      
-      <div className="my-6 flex flex-col md:flex-row justify-between">
+      <div className="my-6 flex flex-col md:flex-row justify-between bg-gray-50 rounded-xl p-4">
           <div className="w-full md:w-1/3 text-left text-xl">
             {pack[0].description}
           </div>
-          <div className="w-full md:w-1/3 text-center"><NumberOfFeeds packId={pack[0].id} /></div>
-          <div className="w-full md:w-1/3 text-center"><AverageDailyPosts packId={pack[0].id} /></div>
+          <div className="w-full md:w-1/3 text-center flex justify-center">
+            <NumberOfFeeds packId={pack[0].id} />
+          </div>
+          <div className="w-full md:w-1/3 text-center flex justify-center">
+            <AverageDailyPosts packId={pack[0].id} />
+          </div>
         </div>
       {/* Main */}
-      <div className="w-full border-t border-black">
+      <div className="w-full">
         <Feeds feeds={fetchedFeeds} />
       </div>
     </div>

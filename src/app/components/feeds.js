@@ -11,7 +11,7 @@ function RenderFeeds({ feeds }) {
     <div>
       <ul>
       {Object.values(feeds.feeds).map((feed, index) => (
-        <li key={index} className="flex flex-row w-full items-center justify-between border-b border-gray-300 py-2 my-2">
+        <li key={index} className="flex flex-row w-full items-center justify-between border-b border-gray-200 py-2 my-2">
           <div className="w-full md:w-3/5">
   
           <Link href={feed.url}><h3 className="font-semibold">{feed.title}</h3></Link>
