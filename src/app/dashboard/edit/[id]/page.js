@@ -63,16 +63,18 @@ export default async function Page({ params }) {
   return (
     <div className="p-4">
       <div>
-        <header className="flex flex-col md:flex-row border-b-2 border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
+        <header className="flex flex-col md:flex-row border-b border-black gap-4 items-start md:items-center md:justify-between pb-2 mb-2">
           <PackTitle user={data.user} packId={pack.id} />
           <Link href={'/packs/' + pack.id}><button className="button">View Pack</button></Link>
         </header>
         <div className="my-6 flex flex-col md:flex-row justify-between">
-          <div className="w-full md:w-1/3 text-left text-xl">
+          <div className="text-left text-xl">
             <PackDescription user={data.user} packId={pack.id} />
           </div>
-          <div className="w-full md:w-1/3 text-center"><NumberOfFeeds packId={pack.id} /></div>
-          <div className="w-full md:w-1/3 text-center"><TotalDailyPosts packId={pack.id} /></div>
+          <div className="flex flex-row justify-end gap-8">
+            <NumberOfFeeds packId={pack.id} />
+            <TotalDailyPosts packId={pack.id} />
+          </div>
         </div>
         <h2 className="border-b border-black">Feeds</h2>
         {feeds.map(feed => (

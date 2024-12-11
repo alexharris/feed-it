@@ -58,11 +58,11 @@ export default function AverageDailyPosts(packId) {
   }, []);
 
   return (
-    <div className="flex flex-row-reverse md:flex-col justify-between border-none md:border-b border-gray-300 py-2 text-center">
-      <div className="md:text-4xl">
+    <div className="flex flex-row-reverse md:flex-col justify-between md:justify-center border-none md:border-b border-gray-300 py-2 text-center md:bg-gray-100 rounded-full p-4 h-32 w-32">
+      <div className="md:text-5xl">
         {average}
       </div>
-      <div className="font-bold">Posts Per Day</div>
+      <div className="text-sm">Posts Per Day</div>
     </div>
   )
 }

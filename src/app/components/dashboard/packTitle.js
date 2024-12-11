@@ -90,7 +90,7 @@ export default function Page(data) {
   return (
     <div className="flex flex-row w-1/2">
       {!editTitle && (
-      <h1>
+      <h1 className="text-xl">
         {title} 
       </h1>
       )}
