@@ -2,22 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
-
-function GetCadence(posts) {
-  let posts2 = posts.posts
-  // console.log(posts.length)
-  if (
-    !posts2 || posts2.length === 0) return "No posts available";
-
-  let postArray = Object.values(posts2).map(post => new Date(post));
-
-  const firstDate = Math.min(...postArray);
-  const lastDate = Math.max(...postArray);
-  const days = (lastDate - firstDate) / (1000 * 60 * 60 * 24);
-  const cadence = postArray.length / days;
-
-  return `${cadence.toFixed(2)}` ;
-}
+import { calculateAverageDailyPosts } from '@/utils/tools';
 
 
 function RenderFeeds({ feeds }) {
@@ -33,7 +18,7 @@ function RenderFeeds({ feeds }) {
             {feed.description}
           </div>
           <div className="w-full md:w-1/5 self-start">
-            <GetCadence posts={feed.itemDates} /> posts / day
+            <span>{calculateAverageDailyPosts(feed.itemDates)} posts / day</span>
           </div>
           <div className="flex flex-row gap-4 w-full md:w-1/5 justify-end">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>

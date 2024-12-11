@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import supabase from '@/lib/supabaseClient'
+// import supabase from '@/lib/supabaseClient'
 import { createClient } from "@/utils/supabase/client"
 
 
@@ -13,30 +13,35 @@ export default function Page() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
+  const supabase = createClient()
+
   useEffect(() => {
+    console.log('create new pack called')
     async function getUser() {
       const supabase = await createClient()
-  
       const { data, error } = await supabase.auth.getUser()
-  
       if (error || !data?.user) {
         console.log('no user')
       }
       else {
         setUser(data.user)
+        console.log(data.user)
       }
       setLoading(false)
     }
-
     getUser()
-
+    
   }, [])
 
   async function addPackToPacksTable(packTitle) {
     const { data, error } = await supabase
     .from('packs')
     .insert([
-      { title: packTitle },
+      { title: packTitle,
+        user_id: user.id,
+        description: 'pack description'
+
+       },
     ])
     .select()
 

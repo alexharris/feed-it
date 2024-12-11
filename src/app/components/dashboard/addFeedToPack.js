@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from "@/utils/supabase/client"
 
-
-
 export default function Page(data) {
 
   const router = useRouter();
@@ -25,7 +23,7 @@ export default function Page(data) {
         console.log('no user')
       }
       else {
-        console.log(data.user)
+        // console.log(data.user)
         setUser(data.user)
       }
       setLoading(false)

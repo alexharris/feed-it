@@ -22,7 +22,6 @@ export default function Page(data) {
         console.log('no user')
       }
       else {
-        console.log(data.user)
         setUser(data.user)
       }
       setLoading(false)
@@ -68,7 +67,7 @@ export default function Page(data) {
       setError('Error updating pack');
       return;
     } else {
-      // location.reload()
+      location.reload()
     }
   }   
 

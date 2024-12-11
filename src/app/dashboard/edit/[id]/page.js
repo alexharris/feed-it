@@ -21,6 +21,7 @@ export default async function Page({ params }) {
     redirect('/')
   }  
 
+
   const id = (await params).id
   let rssFeedUrls = []
 
