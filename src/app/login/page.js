@@ -10,6 +10,7 @@ export default function LoginPage() {
 
   async function handleSubmit(event) {
     event.preventDefault()
+    
     const formData = new FormData(event.target)
     const result = await login(formData)
 
@@ -21,18 +22,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="max-w-sm mx-auto">
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
-      <input id="email" name="email" type="email" required />
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password" required />
-      {error && <div className="bg-red-100 p-4 rounded error">{error}</div>}
-      <button className="button i" formAction={login}>Log in</button>
-      <p>
-        No account? <Link href="/signup">Sign up.</Link>
-      </p>
-    </form>
+    <div className="max-w-sm mx-auto mt-8">
+      <h1>Login</h1>
+      <form className="flex flex-col gap-2 border border-black rounded-xl p-4 mt-8" onSubmit={handleSubmit}>
+        <label className="" htmlFor="email">Email</label>
+        <input className="rounded" id="email" name="email" type="email" required />
+        <label className="" htmlFor="password">Password</label>
+        <input className="rounded" id="password" name="password" type="password" required />
+        {error && <div className="bg-red-100 p-4 rounded error">{error}</div>}
+        <button className="button" formAction={login}>Log in</button>
+        <p>
+          No account? <Link href="/signup">Sign up.</Link>
+        </p>
+      </form>
     </div>
   )
 }
