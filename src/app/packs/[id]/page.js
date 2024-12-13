@@ -78,7 +78,7 @@ export default async function Page({ params }) {
         <h1 className="thermo text-5xl">{pack[0].title}</h1>
         <DownloadFile feeds={fetchedFeeds} />
       </header>      
-      <div className="my-6 flex flex-col md:flex-row justify-between bg-gray-50 rounded-xl p-4 shadow-sm">
+      <div className="my-6 flex flex-col md:flex-row justify-between bg-gray-100 rounded-xl p-4 shadow items-start">
           <div className="w-full md:w-1/3 text-left text-xl">
             {pack[0].description}
           </div>
