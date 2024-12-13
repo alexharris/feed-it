@@ -26,7 +26,7 @@ export default async function Home() {
       <div className="flex flex-col lg:flex-row py-12 rounded gap-4 justify-center">
         <PackCard packId="33" />
         <PackCard packId="52" />
-        <PackCard packId="33" />
+        <PackCard packId="53" />
       </div>
 
     </div>
