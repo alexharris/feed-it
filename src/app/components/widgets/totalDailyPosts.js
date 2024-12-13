@@ -41,7 +41,7 @@ export default function AverageDailyPosts(packId) {
    
       const feed = fetchedFeeds[feedId];
       const itemDates = Object.values(feed.itemDates);
-      const dailyPosts = calculateAverageDailyPosts(itemDates)      
+      const dailyPosts = calculateAverageDailyPosts(itemDates).roundedAverage      
       
       totalPosts += parseFloat(dailyPosts);
     }
@@ -58,7 +58,7 @@ export default function AverageDailyPosts(packId) {
   }, []);
 
   return (
-    <div className="flex flex-row-reverse md:flex-col justify-between md:justify-center border-b md:border border-gray-100 py-2 text-center md:rounded-full md:p-4 md:h-32 w-full md:w-32 ">
+    <div className="flex flex-row-reverse md:flex-col justify-between md:justify-center border-b md:border-none border-gray-100 py-2 md:rounded-full md:p-4 md:h-32 w-full md:w-32 ">
       <div className="md:text-5xl">
         {average}
       </div>

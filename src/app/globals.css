@@ -311,7 +311,7 @@ body {
 }
 
 .icon-link {
-  @apply hover:stroke-blue-600 cursor-pointer;
+  @apply stroke-black hover:stroke-blue-600 cursor-pointer w-8;
 }
 
 h1 {
@@ -326,6 +326,6 @@ h3 {
   @apply text-xl pb-2;
 }
 
-a:not(.button):not(.pill-black):not(.thermo) {
+p a {
   @apply underline decoration-sky-600 decoration-2 underline-offset-4;
 }

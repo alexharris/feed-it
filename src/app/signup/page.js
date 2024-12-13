@@ -21,18 +21,20 @@ export default function SignupPage() {
   }  
 
   return (
-    <div className="max-w-sm mx-auto">
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
-      <input id="email" name="email" type="email" required />
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password" required />
-      {error && <div className="bg-red-100 p-4 rounded error">{error}</div>}
-      <button className="button i" formAction={signup}>Sign up</button>
+    <div className="max-w-sm mx-auto mt-8">
+      <h1>Sign Up</h1>
+      <form className="flex flex-col gap-2 border border-black rounded-xl p-4 my-8" onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
+        <input className="rounded" id="email" name="email" type="email" required />
+        <label htmlFor="password">Password:</label>
+        <input className="rounded" id="password" name="password" type="password" required />
+        {error && <div className="bg-red-100 p-4 rounded error">{error}</div>}
+        <button className="button" formAction={signup}>Sign up</button>
+
+      </form>
       <p>
         Already have an account? <Link href="/login">Sign in.</Link>
-      </p>
-    </form>
+      </p>    
     </div>
   )
 }

@@ -6,21 +6,38 @@ export function calculateAverageDailyPosts(dates) {
   
   // Given a range of dates, calculate the average number of posts per day
   const itemDates = Object.values(dates);
-  // console.log('Item Dates:', itemDates);
+  console.log('Item Dates:', itemDates);
   
+
+  // Some potential date formats:
+  // 2024-12-12T22:48:23.000Z
+  //Tue, 10 Dec 2024 15:15:49 GMT
+
   const parseDate = (dateString) => {
-    const [dayOfWeek, month, day, year] = dateString.split(' ');
-    const parsedDate = new Date(`${month} ${day}, ${year}`);
-    return isNaN(parsedDate) ? null : parsedDate;
+    // Try to parse as ISO 8601 format
+    let parsedDate = new Date(dateString);
+    if (!isNaN(parsedDate)) {
+      return parsedDate;
+    }
+  
+    // Try to parse as RFC 2822 format
+    parsedDate = new Date(Date.parse(dateString));
+    if (!isNaN(parsedDate)) {
+      return parsedDate;
+    }
+  
+    // If the date string doesn't match any known format, return null
+    return null;
   };
 
+  
   const parsedDates = itemDates.map(date => parseDate(date)).filter(date => date !== null);
-  // parsedDates.forEach((date, index) => {
-  //   console.log(`Parsed Date ${index + 1}:`, date);
-  // });
+  parsedDates.forEach((date, index) => {
+    console.log(`Parsed Date ${index + 1}:`, date);
+  });
 
   if (parsedDates.length === 0) {
-    // console.log('No valid dates found.');
+    console.log('No valid dates found.');
     return 0;
   }
 
@@ -45,6 +62,6 @@ export function calculateAverageDailyPosts(dates) {
   const roundedAverage = average.toFixed(2);
   // console.log('Rounded Average:', roundedAverage);
 
-  return roundedAverage;
+  return {earliestDate, latestDate, roundedAverage, totalDays};
 
 }

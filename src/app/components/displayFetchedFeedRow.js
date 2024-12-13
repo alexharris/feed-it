@@ -55,7 +55,7 @@ export default function DisplayFetchedFeeds({ feedRss, packId, feedId, user }) {
             <div className="text-gray-500 text-sm">{rssFeed[0].rss}</div>
           </div>
           <div className="w-full md:w-1/5 self-start">
-            <span>{calculateAverageDailyPosts(rssFeed[0].itemDates)} posts / day</span>
+            <span>{calculateAverageDailyPosts(rssFeed[0].itemDates).roundedAverage} posts / day</span>
           </div>
           <div className="flex flex-row gap-4 w-full md:w-1/5 justify-end">
             {user &&
