@@ -6,7 +6,7 @@ export function calculateAverageDailyPosts(dates) {
   
   // Given a range of dates, calculate the average number of posts per day
   const itemDates = Object.values(dates);
-  console.log('Item Dates:', itemDates);
+  // console.log('Item Dates:', itemDates);
   
 
   // Some potential date formats:
@@ -33,7 +33,7 @@ export function calculateAverageDailyPosts(dates) {
   
   const parsedDates = itemDates.map(date => parseDate(date)).filter(date => date !== null);
   parsedDates.forEach((date, index) => {
-    console.log(`Parsed Date ${index + 1}:`, date);
+    // console.log(`Parsed Date ${index + 1}:`, date);
   });
 
   if (parsedDates.length === 0) {
