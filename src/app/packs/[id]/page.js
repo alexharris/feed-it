@@ -71,6 +71,7 @@ export default async function Page({ params }) {
   const feedIds = pack[0].feed_ids;
 
   const fetchedFeeds = await fetchFeeds(feedIds);
+
   
   return (
     <div className="flex flex-col p-4 mt-8">

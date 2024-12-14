@@ -314,6 +314,10 @@ body {
   @apply stroke-black hover:stroke-blue-600 cursor-pointer w-8;
 }
 
+.icon-link svg {
+  @apply w-6
+}
+
 h1 {
   @apply text-3xl;
 }
@@ -323,7 +327,7 @@ h2 {
 }
 
 h3 {
-  @apply text-xl pb-2;
+  @apply text-lg pb-2;
 }
 
 p a {
