@@ -303,7 +303,7 @@ body {
 }
 
 .button {
-  @apply border border-blue-600 px-4 py-2 rounded text-blue-600 inline-block cursor-pointer;
+  @apply border bg-black px-4 py-2 rounded-full border-none text-white inline-block cursor-pointer;
 }
 
 .pill-black {
@@ -328,4 +328,14 @@ h3 {
 
 p a {
   @apply underline decoration-sky-600 decoration-2 underline-offset-4;
+}
+
+.grid-background {
+  position: relative;
+  background-image: 
+    linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 0, 0, 0) 20%, rgba(255, 255, 255, 0) 80%, rgb(255, 255, 255) 100%),
+    linear-gradient(to right, #ebebeb 1px, transparent 1px),
+    linear-gradient(to bottom, #ebebeb 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px;
+  background-position: 0 0, 0 0, 0 0;
 }

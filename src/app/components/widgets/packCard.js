@@ -32,7 +32,7 @@ export default function PackCard(packId) {
   }, []);
 
   return (
-    <div className="w-full lg:w-1/3 bg-white flex flex-col rounded-xl items-start text-black p-2">
+    <div className="w-full lg:w-1/3 bg-white flex flex-col rounded-xl items-start text-black p-2 shadow">
       <div className="border-b border-gray-200 bg-gray-50 w-full p-4 flex flex-row justify-between items-start rounded-xl shadow-sm">
         <h3 className="text-xl w-3/5 pb-0">{packData ? packData.title : 'Loading...'}</h3>
         <a className="pill-black" href={`/packs/${packId.packId}`}>View</a>
