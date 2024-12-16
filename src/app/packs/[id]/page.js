@@ -40,10 +40,25 @@ async function fetchFeeds(feedIds) {
       return; // Skip this feed if parsing fails
     }
 
-    const itemsObject = {};
+
+    const itemDates = {};
+    const itemContent = {};
     parsedFeed.items.forEach((item, index) => {
-      itemsObject[index] = item.pubDate;
+      itemDates[index] = item.pubDate;
+      itemContent[index] = {
+        title: item.title,
+        content: item['content:encoded'],
+        snippet: item.contentSnippet,
+      }
+      
     });
+
+    
+
+
+
+
+
 
     //parsedFeed comes from the feed itself
     //feed comes from the db
@@ -52,7 +67,8 @@ async function fetchFeeds(feedIds) {
       description: parsedFeed.description,
       url: parsedFeed.link,
       rss: parsedFeed.feedUrl,
-      itemDates: itemsObject
+      itemDates: itemDates,
+      itemContent: itemContent
     };
   }));
   return fetchedFeeds
@@ -92,6 +108,7 @@ export default async function Page({ params }) {
         </div>
       {/* Main */}
       <div className="w-full">
+      
         <Feeds feeds={fetchedFeeds} />
       </div>
     </div>
