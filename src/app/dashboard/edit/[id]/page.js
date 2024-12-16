@@ -40,8 +40,6 @@ export default async function Page({ params }) {
     redirect('/login') 
   }
 
- 
-
   const feedIds = pack.feed_ids
 
   // Fetch the feed details
@@ -50,7 +48,6 @@ export default async function Page({ params }) {
     .select('*')
     .in('id', feedIds)
 
-  
   if (feedsError) {
     console.error('Error fetching feeds:', feedsError)
     return <div>Error fetching feeds</div>

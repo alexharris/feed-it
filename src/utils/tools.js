@@ -1,3 +1,5 @@
+
+
 export function sayHello() {
   console.log('Hello');
 }
@@ -8,7 +10,6 @@ export function calculateAverageDailyPosts(dates) {
   const itemDates = Object.values(dates);
   // console.log('Item Dates:', itemDates);
   
-
   // Some potential date formats:
   // 2024-12-12T22:48:23.000Z
   //Tue, 10 Dec 2024 15:15:49 GMT
@@ -65,3 +66,5 @@ export function calculateAverageDailyPosts(dates) {
   return {earliestDate, latestDate, roundedAverage, totalDays};
 
 }
+
+

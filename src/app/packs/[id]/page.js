@@ -1,22 +1,14 @@
-import React from 'react';
 import supabase from '@/lib/supabaseClient'
 import Feeds from '@/app/components/feeds'
 import DownloadFile from '@/app/components/downloadFile'
 import FeedFrequency from '@/app/components/feedFrequency'
-import Parser from 'rss-parser';
 import Link from 'next/link'
 import AverageDailyPosts from '@/app/components/widgets/totalDailyPosts';
 import NumberOfFeeds from '@/app/components/widgets/numberOfFeeds';
 import PackDescription from '@/app/components/dashboard/packDescription'
-
-const parser = new Parser();
-
-// Tried making my own CORS proxy but it didnt work
-// const CORS_PROXY = "https://cloudflare-cors-anywhere.feedit.workers.dev/"
-// Trying https://corsproxy.io/?
-// const CORS_PROXY = "https://corsproxy.io/?"
-// maybe I dont need to do this if I run this from the server instead of the client? maybe move to page.js??
-// I did move it to page.js and it doesnt seem to need CORS proxy anymore
+import { fetchContentFromFeeds } from '@/utils/server-tools';
+import Stream from '@/app/components/stream';
+import Tabs from '@/app/components/tabs';
 
 async function fetchFeeds(feedIds) {
 
@@ -25,53 +17,7 @@ async function fetchFeeds(feedIds) {
   .select('*')
   .in('id', feedIds);
 
-  const fetchedFeeds = {};
-
-  await Promise.all(feeds.map(async (feed) => {
-    
-    const response = await fetch(feed.rss);
-    const text = await response.text();
-    
-    let parsedFeed;
-    try {
-      parsedFeed = await parser.parseString(text);
-    } catch (error) {
-      console.error(`Failed to parse feed: ${feed.rss}`, error);
-      return; // Skip this feed if parsing fails
-    }
-
-
-    const itemDates = {};
-    const itemContent = {};
-    parsedFeed.items.forEach((item, index) => {
-      itemDates[index] = item.pubDate;
-      itemContent[index] = {
-        title: item.title,
-        content: item['content:encoded'],
-        snippet: item.contentSnippet,
-      }
-      
-    });
-
-    
-
-
-
-
-
-
-    //parsedFeed comes from the feed itself
-    //feed comes from the db
-    fetchedFeeds[feed.id] = {
-      title: parsedFeed.title,
-      description: parsedFeed.description,
-      url: parsedFeed.link,
-      rss: parsedFeed.feedUrl,
-      itemDates: itemDates,
-      itemContent: itemContent
-    };
-  }));
-  return fetchedFeeds
+  return fetchContentFromFeeds(feeds)
 }
 
 
@@ -88,29 +34,31 @@ export default async function Page({ params }) {
 
   const fetchedFeeds = await fetchFeeds(feedIds);
 
-  
   return (
     <div className="flex flex-col p-4 mt-8">
       <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between pb-2">
-        <h1 className="thermo text-5xl">{pack[0].title}</h1>
+        <h1 className="thermo text-3xl">{pack[0].title}</h1>
         <DownloadFile feeds={fetchedFeeds} />
       </header>      
       <div className="my-6 flex flex-col md:flex-row justify-between bg-gray-100 rounded-xl p-4 shadow items-start">
-          <div className="w-full md:w-1/3 text-left text-xl">
-            {pack[0].description}
-          </div>
-          <div className="w-full md:w-1/3 text-center flex justify-center">
-            <NumberOfFeeds packId={pack[0].id} />
-          </div>
-          <div className="w-full md:w-1/3 text-center flex justify-center">
-            <AverageDailyPosts packId={pack[0].id} />
-          </div>
+        <div className="w-full md:w-1/3 text-left text-xl">
+          {pack[0].description}
         </div>
-      {/* Main */}
-      <div className="w-full">
-      
-        <Feeds feeds={fetchedFeeds} />
+        <div className="w-full md:w-1/3 text-center flex justify-center">
+          <NumberOfFeeds packId={pack[0].id} />
+        </div>
+        <div className="w-full md:w-1/3 text-center flex justify-center">
+          <AverageDailyPosts packId={pack[0].id} />
+        </div>
       </div>
+      <Tabs>
+        <div title="Stream">
+          <Stream feeds={fetchedFeeds} />
+        </div>        
+        <div title="Feeds">
+          <Feeds feeds={fetchedFeeds} />
+        </div>
+      </Tabs>
     </div>
   )
 }
