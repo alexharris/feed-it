@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
-import { calculateAverageDailyPosts } from '@/utils/tools';
+import { calculateAverageDailyPosts, getImage } from '@/utils/tools';
 
 function getFavicon(url) {
   const urlObj = new URL(url);
@@ -15,12 +15,14 @@ function RenderFeeds({ feeds }) {
     <div>
       <ul>
       {Object.values(feeds.feeds).map((feed, index) => (
+        
         <li key={index} className="flex flex-col w-full justify-between border-b border-gray-200 py-2 my-2">
+          { console.log(feed) }
           <div className="flex flex-row w-full items-center justify-between"> 
             <div className="w-full md:w-3/5 ">            
               <div className="flex flex-row gap-4 items-center">
-                <img className="w-4 h-4" src={getFavicon(feed.itemContent[0].src)} /> 
-                <Link href={feed.url}><h3 className="font-semibold pb-0">{feed.title}</h3></Link>
+              <img className="w-4 h-4" src={getImage(feed.itemContent[0].image, feed.itemContent[0].src)} /> 
+              <Link href={feed.url}><h3 className="font-semibold pb-0">{feed.title}</h3></Link>
               </div>
 
               <span className="text-sm text-gray-500">{feed.description}</span>

@@ -1,19 +1,14 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
+import { getImage } from '@/utils/tools';
 
 
-function getImage(image, src) {
-  if(image) {
-    return image
-  } else {
-    const urlObj = new URL(src);
-    return `${urlObj.origin}/favicon.ico`; 
-  }
-
-}
 
 function StreamFeeds({ feeds }) {
+
+
+
 
   console.log(feeds)
 

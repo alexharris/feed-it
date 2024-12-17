@@ -4,6 +4,15 @@ export function sayHello() {
   console.log('Hello');
 }
 
+export function getImage(image, src) {
+  if(image) {
+    return image
+  } else {
+    const urlObj = new URL(src);
+    return `${urlObj.origin}/favicon.ico`; 
+  } 
+}
+
 export function calculateAverageDailyPosts(dates) {
   
   // Given a range of dates, calculate the average number of posts per day
