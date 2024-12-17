@@ -35,30 +35,38 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
 
   return (
-    <div className="flex flex-col p-4 mt-8">
+    <div className="flex flex-col p-4">
       <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between pb-2">
-        <h1 className="thermo text-3xl">{pack[0].title}</h1>
-        <DownloadFile feeds={fetchedFeeds} />
-      </header>      
-      <div className="my-6 flex flex-col md:flex-row justify-between bg-gray-100 rounded-xl p-4 shadow items-start">
-        <div className="w-full md:w-1/3 text-left text-xl">
-          {pack[0].description}
+        
+        
+      </header>   
+      <div className="flex flex-col-reverse md:flex-row items-start gap-12">
+        <div className="w-full md:w-3/5">  
+          <Tabs>
+            <div title="Stream">
+              <Stream feeds={fetchedFeeds} />
+            </div>        
+            <div title="Feeds">
+              <Feeds feeds={fetchedFeeds} />
+            </div>
+          </Tabs>
         </div>
-        <div className="w-full md:w-1/3 text-center flex justify-center">
-          <NumberOfFeeds packId={pack[0].id} />
-        </div>
-        <div className="w-full md:w-1/3 text-center flex justify-center">
-          <AverageDailyPosts packId={pack[0].id} />
-        </div>
-      </div>
-      <Tabs>
-        <div title="Stream">
-          <Stream feeds={fetchedFeeds} />
+        <div className="flex flex-col justify-start border mb-4 p-4 items-start w-full md:w-2/5 rounded-xl md:sticky md:top-20">
+          <h1 className="thermo text-4xl mb-2">{pack[0].title}</h1>
+          <div className="w-full text-left text-xl">
+            {pack[0].description}
+          </div>
+          
+          <div className="w-full">
+            <NumberOfFeeds packId={pack[0].id} />
+          </div>
+          <div className="w-full">
+            <AverageDailyPosts packId={pack[0].id} />
+          </div>
+          <DownloadFile feeds={fetchedFeeds} />
         </div>        
-        <div title="Feeds">
-          <Feeds feeds={fetchedFeeds} />
-        </div>
-      </Tabs>
+      </div>   
+
     </div>
   )
 }

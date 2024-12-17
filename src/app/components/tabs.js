@@ -6,7 +6,7 @@ export default function Tabs({ children }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div>
+    <div className="">
       <div className="tabs">
         {React.Children.map(children, (child, index) => (
           <button

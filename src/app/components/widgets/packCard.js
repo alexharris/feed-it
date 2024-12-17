@@ -37,8 +37,8 @@ export default function PackCard(packId) {
         <h3 className="text-xl w-3/5 pb-0">{packData ? packData.title : 'Loading...'}</h3>
         <a className="pill-black" href={`/packs/${packId.packId}`}>View</a>
       </div>
-      <span className="p-0 md:px-4 py-4 w-full border-b border-gray-100">{packData ? packData.description : 'Loading...'}</span>
-      <div className="flex flex-col md:flex-row justify-start md:gap-8 w-full md:p-4">
+      <span className="p-0 md:px-4 pt-4 w-full">{packData ? packData.description : 'Loading...'}</span>
+      <div className="flex flex-col justify-start w-full md:px-4">
         <NumberOfFeeds packId={packId.packId} />
         <TotalDailyPosts packId={packId.packId} />
       </div>

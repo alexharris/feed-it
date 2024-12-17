@@ -25,12 +25,12 @@ function StreamFeeds({ feeds }) {
 
   
   return (
-    <div className="flex flex-col gap-8 justify-center items-center w-full md:w-1/2 mx-auto"> 
+    <div className="flex flex-col gap-8 justify-center items-center w-full"> 
 
       {allItems.map((item, index) => (
         <div key={index} className="w-full pb-6 border-b border-gray-200">
           <div className="flex flex-row gap-4 items-center text-gray-500 text-sm mb-2">
-            <img className="w-4 h-4" src={getImage(item.image, item.src)} /> 
+            <img className="w-6 h-6" src={getImage(item.image, item.src)} /> 
             <span className="font-bold">{item.src}</span>
             {new Date(item.date).toLocaleString()}
           </div>
