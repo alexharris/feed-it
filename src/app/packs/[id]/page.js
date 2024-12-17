@@ -41,7 +41,7 @@ export default async function Page({ params }) {
         
       </header>   
       <div className="flex flex-col-reverse md:flex-row items-start lg:w-4/5 lg:mx-auto">
-        <div className="w-full md:w-3/5">  
+        <div className="w-full md:w-3/5 bg-gray-50">  
           <Tabs>
             <div title="Stream">
               <Stream feeds={fetchedFeeds} />
@@ -51,7 +51,7 @@ export default async function Page({ params }) {
             </div>
           </Tabs>
         </div>
-        <div className="flex flex-col justify-start md:border-l border-gray-100 my-4 ml-4 md:px-4 items-start w-full md:w-2/5 md:sticky md:top-20">
+        <div className="flex flex-col justify-start md:ml-6 p-4 bg-gray-50 md:rounded-xl items-start w-full md:w-2/5 md:sticky md:top-20">
           <h1 className="text-2xl mb-2">{pack[0].title}</h1>
           <div className="w-full text-left text-xl">
             {pack[0].description}

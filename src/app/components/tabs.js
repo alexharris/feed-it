@@ -17,7 +17,7 @@ export default function Tabs({ children }) {
           </button>
         ))}
       </div>
-      <div className="tab-content">
+      <div className="tab-content rounded-t-2xl bg-white">
         {React.Children.map(children, (child, index) => (
           activeTab === index ? child : null
         ))}

@@ -348,7 +348,7 @@ p a {
 .tabs {
   display: flex;
   /* border-bottom: 1px solid #ccc; */
-  @apply bg-gray-50 px-2 pt-4;
+  @apply bg-gray-50 px-4 pt-4;
 }
 
 .tab {
