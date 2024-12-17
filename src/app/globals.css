@@ -344,14 +344,30 @@ p a {
   background-position: 0 0, 0 0, 0 0;
 }
 
+
 .tabs {
-  @apply flex flex-row gap-4 mb-6
+  display: flex;
+  /* border-bottom: 1px solid #ccc; */
+  @apply bg-gray-50 px-2 pt-4;
 }
 
-.tabs .tab {
-  @apply border rounded-xl py-2 px-8 text-2xl
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+
+  background-color: #f1f1f1;
+  margin-right: 2px;
+  @apply rounded-t
 }
 
-.tabs .tab.active {
-  @apply bg-gray-50
+.tab.active {
+  background-color: #fff;
+  @apply border-l-2 border-gray-300
+  /* border-color: #ccc; */
+  /* border-bottom: 1px solid #fff; */
+}
+
+.tab-content {
+  padding: 20px;
+  border-top: none;
 }

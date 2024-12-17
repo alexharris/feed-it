@@ -35,12 +35,12 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
 
   return (
-    <div className="flex flex-col p-4">
-      <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between pb-2">
+    <div className="flex flex-col">
+      <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between">
         
         
       </header>   
-      <div className="flex flex-col-reverse md:flex-row items-start gap-12">
+      <div className="flex flex-col-reverse md:flex-row items-start lg:w-4/5 lg:mx-auto">
         <div className="w-full md:w-3/5">  
           <Tabs>
             <div title="Stream">
@@ -51,8 +51,8 @@ export default async function Page({ params }) {
             </div>
           </Tabs>
         </div>
-        <div className="flex flex-col justify-start border mb-4 p-4 items-start w-full md:w-2/5 rounded-xl md:sticky md:top-20">
-          <h1 className="thermo text-4xl mb-2">{pack[0].title}</h1>
+        <div className="flex flex-col justify-start md:border-l border-gray-100 my-4 ml-4 md:px-4 items-start w-full md:w-2/5 md:sticky md:top-20">
+          <h1 className="text-2xl mb-2">{pack[0].title}</h1>
           <div className="w-full text-left text-xl">
             {pack[0].description}
           </div>
