@@ -63,7 +63,7 @@ export default async function Page({ params }) {
           <div className="w-full">
             <AverageDailyPosts packId={pack[0].id} />
           </div>
-          <DownloadFile feeds={fetchedFeeds} />
+          <DownloadFile title={pack[0].title} feeds={fetchedFeeds} />
         </div>        
       </div>   
 
