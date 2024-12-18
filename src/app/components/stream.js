@@ -22,20 +22,39 @@ function getDisplayDate(date) {
 function shortenSnippet(snippet, link) {
   if (snippet.length > 500) {
     return (
-      <span>
-      {snippet.substring(0, 500)}...<br /><a href={link}>Read more</a>
-      </span>
+      <div className="ml-10">
+        <p >
+          {snippet.substring(0, 500)} [<a className="inline no-underline text-blue-600" href={link}>more</a>]
+        </p>
+      </div>
     ) }
     else {
-      return snippet;
+      return (
+        <div className="ml-10">
+          <p>
+            {snippet}
+          </p>
+        </div>
+      )
     }
+}
+
+function cleanUpSrc(src) {
+
+  // remove http:// or https://
+  let cleanedSrc = src.replace(/(^\w+:|^)\/\//, '');
   
+  //remove any path after the first slash
+  cleanedSrc = cleanedSrc.replace(/\/.*/, '');
+
+
+  
+
+  return src;
 }
 
 
 function StreamFeeds({ feeds }) {
-
-  console.log(feeds)
 
   const allItems = [];
 
@@ -57,13 +76,18 @@ function StreamFeeds({ feeds }) {
           <div className="flex flex-row gap-4 items-center text-gray-400 text-sm mb-2">
             <a href={item.src}><img className="w-6 h-6" src={getImage(item.image, item.src)} /></a>
             <span className="flex flex-row gap-4">
-              <a href={item.src}>{item.src}</a>
+              <a href={item.src}>{cleanUpSrc(item.src)}</a>
               {getDisplayDate(item.date)}
             </span>
             
           </div>
           <h3 className="font-bold ml-10"><a href={item.link}>{item.title}</a></h3>
-          <p className="ml-10">{shortenSnippet(item.snippet, item.link)}</p>
+            {/* if snippet exists */}
+            {item.snippet &&
+              shortenSnippet(item.snippet, item.link)
+            }
+
+          
           
         </div>
       ))}

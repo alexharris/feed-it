@@ -32,6 +32,7 @@ export async function fetchContentFromFeeds(feeds) {
     }
 
     parsedFeed.items.forEach((item, index) => {
+        console.log(item)
   
       itemDates[index] = item.pubDate;
       const url = new URL(feed.rss);
@@ -59,6 +60,8 @@ export async function fetchContentFromFeeds(feeds) {
       itemContent: itemContent
     };
   }));
+
+  console.log(fetchedFeeds)
 
   return fetchedFeeds
 }
