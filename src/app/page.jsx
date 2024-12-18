@@ -9,9 +9,9 @@ export default async function Home() {
     <section className="">   
     <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-8 px-4 py-8 md:py-16 max-w-5xl mx-auto">
       <div className="w-full md:w-1/2">
-        <div className="text-4xl md:text-6xl pb-6">Starter packs for the web</div>
+        <div className="text-4xl md:text-6xl pb-6">Starter packs for the open web</div>
 
-        <div className="text-xl md:text-2xl mb-8">Create and share RSS starter packs of your favorite blogs, newsletters and social feeds.</div>
+        <div className="text-xl md:text-2xl mb-8">Create, share and analyze starter packs of your favorite blogs, newsletters and social feeds.</div>
         <Link href="/signup"><div className="button">Get Started</div></Link>
       </div>
       <div className="w-full md:w-1/2 flex justify-center">
