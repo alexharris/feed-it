@@ -5,8 +5,11 @@ export function sayHello() {
 }
 
 export function getImage(image, src) {
+  console.log(src)
   if(image) {
     return image
+  } else if (src.includes('bsky.app')) {
+    return 'https://bsky.app/static/favicon-32x32.png';
   } else {
     const urlObj = new URL(src);
     return `${urlObj.origin}/favicon.ico`; 

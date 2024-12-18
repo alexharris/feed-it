@@ -4,11 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { calculateAverageDailyPosts, getImage } from '@/utils/tools';
 
-function getFavicon(url) {
-  const urlObj = new URL(url);
-  return `${urlObj.origin}/favicon.ico`;
-}
-
 function RenderFeeds({ feeds }) {
   
   return (

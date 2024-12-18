@@ -21,6 +21,7 @@ export async function fetchContentFromFeeds(feeds) {
       return; // Skip this feed if parsing fails
     }
 
+    console.log(parsedFeed)
 
     const itemDates = {};
     const itemContent = {};
@@ -32,7 +33,7 @@ export async function fetchContentFromFeeds(feeds) {
     }
 
     parsedFeed.items.forEach((item, index) => {
-        console.log(item)
+        // console.log(item)
   
       itemDates[index] = item.pubDate;
       const url = new URL(feed.rss);
@@ -52,7 +53,6 @@ export async function fetchContentFromFeeds(feeds) {
     //feed comes from the db
     fetchedFeeds[feed.id] = {
       title: parsedFeed.title,
-      
       description: parsedFeed.description,
       url: parsedFeed.link,
       rss: parsedFeed.feedUrl,
@@ -61,7 +61,6 @@ export async function fetchContentFromFeeds(feeds) {
     };
   }));
 
-  console.log(fetchedFeeds)
 
   return fetchedFeeds
 }

@@ -39,17 +39,36 @@ function shortenSnippet(snippet, link) {
     }
 }
 
-function cleanUpSrc(src) {
-
-  // remove http:// or https://
-  let cleanedSrc = src.replace(/(^\w+:|^)\/\//, '');
-  
-  //remove any path after the first slash
-  cleanedSrc = cleanedSrc.replace(/\/.*/, '');
-
-  return cleanedSrc;
+function cleanUpSrc(src, link) {
+  let cleanSrc;
+  if (src.includes("bsky.app")) {
+    const parts = link.split("/profile/");
+    cleanSrc = parts.length > 1 ? parts[1] : src;
+    cleanSrc = cleanSrc.split('/')[0];
+  } else if (src.includes("substack")) {
+    cleanSrc = src.replace(/^https?:\/\//, '');
+  } else if (src.includes("beehiiv")) {
+    const url = new URL(link);
+    cleanSrc = url.hostname;
+  } else {
+    cleanSrc = src.replace(/^https?:\/\//, '');
+    const url = new URL(src);
+    cleanSrc = url.hostname.split('.').slice(-2).join('.');
+  }
+  return cleanSrc;
 }
 
+function cleanUpLink(src, link) {
+  if (src.includes("substack")) {
+    return src;
+  } else if (src.includes("beehiiv")) {
+    return 'https://' + cleanUpSrc(src, link);
+  } else if (src.includes("bsky.app")) {
+    return link.split('/post')[0];
+  } else {
+    return src;
+  }
+}
 
 function StreamFeeds({ feeds }) {
 
@@ -61,6 +80,8 @@ function StreamFeeds({ feeds }) {
     });
   });
 
+  console.log(allItems)
+
 
   allItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -71,9 +92,9 @@ function StreamFeeds({ feeds }) {
       {allItems.map((item, index) => (
         <div key={index} className="w-full pb-8 border-b border-gray-100">
           <div className="flex flex-row gap-4 items-center text-gray-400 text-sm mb-2">
-            <a href={item.src}><img className="w-6 h-6" src={getImage(item.image, item.src)} /></a>
+            <a href={cleanUpLink(item.src, item.link)}><img className="w-6 h-6" src={getImage(item.image, item.src)} /></a>
             <span className="flex flex-row gap-4">
-              <a href={item.src}>{cleanUpSrc(item.src)}</a>
+              <a href={cleanUpLink(item.src, item.link)}>{cleanUpSrc(item.src, item.link)}</a>
               {getDisplayDate(item.date)}
             </span>
             
