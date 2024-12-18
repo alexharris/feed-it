@@ -47,10 +47,7 @@ function cleanUpSrc(src) {
   //remove any path after the first slash
   cleanedSrc = cleanedSrc.replace(/\/.*/, '');
 
-
-  
-
-  return src;
+  return cleanedSrc;
 }
 
 
