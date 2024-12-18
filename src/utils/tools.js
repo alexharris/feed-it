@@ -5,7 +5,6 @@ export function sayHello() {
 }
 
 export function getImage(image, src) {
-  console.log(src)
   if(image) {
     return image
   } else if (src.includes('bsky.app')) {

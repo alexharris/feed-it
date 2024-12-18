@@ -22,10 +22,11 @@ export default async function Home() {
       <div className="text-center text-3xl">
       Here are some examples
       </div>
-      <div className="flex flex-col lg:flex-row py-12 rounded gap-4 justify-center">
+      <div className="flex flex-col md:flex-row flex-wrap py-12 rounded gap-4 justify-center">
         <PackCard packId="33" />
         <PackCard packId="52" />
         <PackCard packId="55" />
+        <PackCard packId="53" />
       </div>
       <p className="text-center text-xl">
       <Link href="/signup">Sign up</Link> to make your own

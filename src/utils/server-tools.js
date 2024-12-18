@@ -21,8 +21,6 @@ export async function fetchContentFromFeeds(feeds) {
       return; // Skip this feed if parsing fails
     }
 
-    console.log(parsedFeed)
-
     const itemDates = {};
     const itemContent = {};
 

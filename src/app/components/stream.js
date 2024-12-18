@@ -72,19 +72,24 @@ function cleanUpLink(src, link) {
 
 function StreamFeeds({ feeds }) {
 
+  console.log(feeds)
+
   const allItems = [];
 
   Object.values(feeds).forEach(feed => {
     Object.values(feed.itemContent).forEach(item => {
+      console.log(feed)
+      item['srcTitle'] = feed.title
+      item['srcLink'] = feed.url
       allItems.push(item);
     });
   });
 
-  console.log(allItems)
 
 
   allItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+  console.log(allItems)
   
   return (
     <div className="flex flex-col gap-8 justify-center items-center w-full"> 
@@ -92,9 +97,9 @@ function StreamFeeds({ feeds }) {
       {allItems.map((item, index) => (
         <div key={index} className="w-full pb-8 border-b border-gray-100">
           <div className="flex flex-row gap-4 items-center text-gray-400 text-sm mb-2">
-            <a href={cleanUpLink(item.src, item.link)}><img className="w-6 h-6" src={getImage(item.image, item.src)} /></a>
+            <a href={item.srcLink}><img className="w-6 h-6" src={getImage(item.image, item.src)} /></a>
             <span className="flex flex-row gap-4">
-              <a href={cleanUpLink(item.src, item.link)}>{cleanUpSrc(item.src, item.link)}</a>
+              <a href={item.srcLink}>{item.srcTitle}</a>
               {getDisplayDate(item.date)}
             </span>
             
@@ -104,6 +109,7 @@ function StreamFeeds({ feeds }) {
             {item.snippet &&
               shortenSnippet(item.snippet, item.link)
             }
+            <a className="ml-10 uppercase text-sm text-blue-400" href={item.link}>Read →</a>
 
           
           
