@@ -38,7 +38,10 @@ export default async function Page({ params }) {
     <div className="flex flex-col">
       {/* <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between">
       </header>    */}
-      <div className="flex flex-col-reverse md:flex-row items-start lg:w-4/5 lg:mx-auto">
+      <div className="flex flex-col-reverse md:flex-row items-start md:w-4/5 lg:mx-auto">
+        <div className="md:w-1/5">
+
+        </div>
         <div className="w-full md:w-3/5 bg-gray-50 border-r border-gray-100">  
           <Tabs>
             <div title="Stream">
@@ -49,7 +52,7 @@ export default async function Page({ params }) {
             </div>
           </Tabs>
         </div>
-        <div className="flex flex-col justify-start md:m-4 p-4 bg-gray-50 md:rounded-xl items-start w-full md:w-2/5 md:sticky md:top-20">
+        <div className="flex flex-col justify-start md:m-4 p-4 bg-gray-50 md:rounded-xl items-start w-full md:w-1/5 md:sticky md:top-20">
           <h1 className="text-2xl mb-2">{pack[0].title}</h1>
           <div className="w-full text-left text-xl">
             {pack[0].description}
