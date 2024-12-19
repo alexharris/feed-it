@@ -72,13 +72,10 @@ function cleanUpLink(src, link) {
 
 function StreamFeeds({ feeds }) {
 
-  console.log(feeds)
-
   const allItems = [];
 
   Object.values(feeds).forEach(feed => {
     Object.values(feed.itemContent).forEach(item => {
-      console.log(feed)
       item['srcTitle'] = feed.title
       item['srcLink'] = feed.url
       allItems.push(item);

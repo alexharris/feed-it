@@ -11,7 +11,7 @@ function RenderFeeds({ feeds }) {
       <ul>
       {Object.values(feeds.feeds).map((feed, index) => (
         
-        <li key={index} className="flex flex-col w-full justify-between border-b border-gray-200 pb-4 my-4">
+        <li key={index} className="flex flex-col w-full justify-between border-b border-gray-200 pb-4 mb-4">
           <div className="flex flex-col md:flex-row w-full gap-4 items-start justify-between"> 
             <div className="w-full md:w-4/5 ">            
               <div className="flex flex-row gap-4 items-center mb-2">

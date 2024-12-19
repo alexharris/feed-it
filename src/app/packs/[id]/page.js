@@ -35,38 +35,41 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
 
   return (
-    <div className="flex flex-col">
-      {/* <header className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-between">
-      </header>    */}
-      <div className="flex flex-col-reverse md:flex-row items-start md:w-4/5 lg:mx-auto">
-        <div className="md:w-1/5">
-
-        </div>
-        <div className="w-full md:w-3/5 bg-gray-50 border-r border-gray-100">  
-          <Tabs>
-            <div title="Stream">
-              <Stream feeds={fetchedFeeds} />
-            </div>        
-            <div title="Feeds">
-              <Feeds feeds={fetchedFeeds} />
+    <div className="flex flex-col-reverse md:grid grid-cols-11 md:gap-4 items-start">
+      <div className="col-start-3 col-span-1">
+        {/* empty column for now */}
+      </div>
+      <div className="w-full col-span-5 bg-gray-50 border-x border-gray-100">  
+        <Tabs>
+          <div title="Stream">
+            <Stream feeds={fetchedFeeds} />
+          </div>        
+          <div title="Feeds">
+            <Feeds feeds={fetchedFeeds} />
+          </div>
+          <div title="Download">
+            <div className="w-full">
+              <p className="mb-4 w-full">Download this OPML file and import into the RSS reader of your choice.</p>
+              <DownloadFile title={pack[0].title} feeds={fetchedFeeds} />
             </div>
-          </Tabs>
+          </div>       
+        </Tabs>
+      </div>
+      <div className="w-full col-span-2 col-end-11 md:sticky flex flex-col justify-start py-4 px-4 bg-gray-50 md:bg-white md:rounded-xl items-start md:top-20">
+        <h1 className="text-xl mb-2 mr-6 font-semibold">{pack[0].title}</h1>
+        <div className="w-full text-left">
+          {pack[0].description}
         </div>
-        <div className="flex flex-col justify-start md:m-4 p-4 bg-gray-50 md:rounded-xl items-start w-full md:w-1/5 md:sticky md:top-20">
-          <h1 className="text-2xl mb-2">{pack[0].title}</h1>
-          <div className="w-full text-left text-xl">
-            {pack[0].description}
-          </div>
-          <div className="w-full">
-            <NumberOfFeeds packId={pack[0].id} />
-          </div>
-          <div className="w-full">
-            <AverageDailyPosts packId={pack[0].id} />
-          </div>
-          <DownloadFile title={pack[0].title} feeds={fetchedFeeds} />
-        </div>        
-      </div>   
-
+        <div className="w-full flex flex-col gap-2 mt-4 text-gray-600">
+          <NumberOfFeeds packId={pack[0].id} />
+          <AverageDailyPosts packId={pack[0].id} />
+        </div>
+        <span className="absolute top-6 right-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
+          </svg>
+        </span>
+      </div>        
     </div>
   )
 }

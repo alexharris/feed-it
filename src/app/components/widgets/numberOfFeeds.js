@@ -34,11 +34,10 @@ export default function NumberOfFeeds(packId) {
 
 
   return (
-    <div className="flex flex-row md:flex-col justify-between md:justify-center border-y border-gray-50 py-2 mt-2 w-full">
+
       <div className="">
         {numberOfFeeds} feeds
       </div>
-      {/* <div className="text-sm">Feed Count</div> */}
-    </div>
+
   )
 }
