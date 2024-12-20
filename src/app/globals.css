@@ -357,7 +357,7 @@ p a {
 
   background-color: #f1f1f1;
   margin-right: 2px;
-  @apply rounded-t
+  @apply rounded-t border-l-2 border-gray-50
 }
 
 .tab.active {

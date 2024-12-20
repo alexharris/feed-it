@@ -36,8 +36,11 @@ function downloadOPML(data) {
 function DownloadFile(data) {
   return (
     <div>
-      <button className="button flex flex-row items-end" onClick={() => downloadOPML(data)}><svg className="inline mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>Download OPML</button>
-    </div>
+      <button className="border border-black hover:bg-gray-100 rounded-3xl py-2 px-4 flex flex-row text-sm gap-2" onClick={() => downloadOPML(data)}>
+        <svg className="stroke-black w-4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+        Download Pack
+      </button>
+      </div>
   );
 }
 
