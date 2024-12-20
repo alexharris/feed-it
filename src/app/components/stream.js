@@ -85,8 +85,6 @@ function StreamFeeds({ feeds }) {
 
 
   allItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  console.log(allItems)
   
   return (
     <div className="flex flex-col gap-8 justify-center items-center w-full"> 

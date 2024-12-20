@@ -35,11 +35,11 @@ export default async function Page({ params }) {
   const fetchedFeeds = await fetchFeeds(feedIds);
 
   return (
-    <div className="flex flex-col-reverse md:grid grid-cols-11 md:gap-4 items-start">
+    <div className="flex flex-col-reverse h-full lg:grid grid-cols-11 lg:gap-4 items-start">
       <div className="col-start-3 col-span-1">
         {/* empty column for now */}
       </div>
-      <div className="w-full col-span-5 bg-gray-50 border-x border-gray-100">  
+      <div className="w-full h-full overflow-scroll col-span-5 bg-gray-50 border-x border-gray-100">  
         <Tabs>
           <div title="Stream">
             <Stream feeds={fetchedFeeds} />
@@ -47,28 +47,22 @@ export default async function Page({ params }) {
           <div title="Feeds">
             <Feeds feeds={fetchedFeeds} />
           </div>
-          <div title="Download">
+          <div title="Analysis">
             <div className="w-full">
-              <p className="mb-4 w-full">Download this OPML file and import into the RSS reader of your choice.</p>
-              <DownloadFile title={pack[0].title} feeds={fetchedFeeds} />
+              <div className="w-full flex flex-col gap-2 mt-4 text-gray-600">
+                <NumberOfFeeds packId={pack[0].id} />
+                <AverageDailyPosts packId={pack[0].id} />
+              </div>              
             </div>
           </div>       
         </Tabs>
       </div>
-      <div className="w-full col-span-2 col-end-11 md:sticky flex flex-col justify-start py-4 px-4 bg-gray-50 md:bg-white md:rounded-xl items-start md:top-20">
+      <div className="w-full col-span-3 xl:col-span-2 col-end-12 xl:col-end-11 lg:sticky flex flex-col justify-start py-4 px-4 bg-gray-50 lg:bg-white lg:rounded-xl items-start top-0">
         <h1 className="text-xl mb-2 mr-6 font-semibold">{pack[0].title}</h1>
-        <div className="w-full text-left">
+        <div className="w-full text-left mb-4">
           {pack[0].description}
         </div>
-        <div className="w-full flex flex-col gap-2 mt-4 text-gray-600">
-          <NumberOfFeeds packId={pack[0].id} />
-          <AverageDailyPosts packId={pack[0].id} />
-        </div>
-        <span className="absolute top-6 right-5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
-          </svg>
-        </span>
+        <DownloadFile title={pack[0].title} feeds={fetchedFeeds} />
       </div>        
     </div>
   )

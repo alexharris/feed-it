@@ -13,12 +13,17 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />        
       </head>
-      <body>
-        <header className="p-4 text-lg flex flex-row justify-between items-center border-b border-gray-200 sticky top-0 z-50 bg-white">
-          <Link href="/" className="thermo text-xl">Feed.Computer</Link>
-          <HeaderUser />
-        </header>
-        {children}
+      <body className="h-screen">
+        <div className="flex flex-col h-full">
+          <header className="p-4 text-lg flex flex-row justify-between items-center border-b border-gray-200 sticky top-0 z-50 bg-white">
+            <Link href="/" className="thermo text-xl">Feed.Computer</Link>
+            <HeaderUser />
+          </header>
+          {children}
+          <footer>
+            {/*  */}
+          </footer>
+        </div>
       </body>
     </html>
   );
