@@ -23,21 +23,7 @@ export default function RootLayout({ children }) {
             <HeaderUser />
           </header>
           {children}
-          <footer className="py-16 text-center" >
-            {/*  */}
-            <form
-              action="https://buttondown.com/api/emails/embed-subscribe/alexharris"
-              method="post"
-              target="popupwindow"
-              onsubmit="window.open('https://buttondown.com/alexharris', 'popupwindow')"
-              className="embeddable-buttondown-form flex flex-col items-center gap-2"
-            >
-              <label for="bd-email">Feed.Computer is in progress. Sign up if you want (very infrequent) updates.</label>
-              <input type="email" name="email" id="bd-email" />
-              
-              <input className="button" type="submit" value="Subscribe" />
-
-            </form>            
+          <footer className="" >
           </footer>
         </div>
       </body>
