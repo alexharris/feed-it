@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from "@/utils/supabase/client"
+import { isValidRSSFeed } from '@/utils/server-tools';
 
 export default function Page(data) {
 
@@ -88,22 +89,21 @@ export default function Page(data) {
 
 
 
-
   async function handleSubmit(e) {
-    
     e.preventDefault();
     const inputElement = document.getElementById('feedUrl');
     if (!inputElement.checkValidity()) {
-      setError('Please enter a valid URL');
+      setError('Please enter a valid RSS feed (including https://)');
       return;
     }
 
-    if(feedUrl == '') {
-      setError('Please enter an rss feed');
+    const isValid = await isValidRSSFeed(feedUrl);
+    if (!isValid) {
+      setError('Please enter a valid RSS feed');
       return;
     }
 
-    addNewFeedToFeedsTable(feedUrl)
+    addNewFeedToFeedsTable(feedUrl);
   }
 
   return (

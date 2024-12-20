@@ -4,6 +4,18 @@ import Parser from 'rss-parser';
 
 const parser = new Parser();
 
+export async function isValidRSSFeed(url) {
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    const parsedFeed = await parser.parseString(text);
+    return parsedFeed.items && parsedFeed.items.length > 0;
+  } catch (error) {
+    console.error('Error validating RSS feed:', error);
+    return false;
+  }
+}
+
 export async function fetchContentFromFeeds(feeds) {
 
   const fetchedFeeds = {};
@@ -62,3 +74,5 @@ export async function fetchContentFromFeeds(feeds) {
 
   return fetchedFeeds
 }
+
+
